@@ -12,6 +12,12 @@ d1 $ n "[c5,e5,g5,b5]*8" # s "supersquare" # release "0.3"
 # bandq "5.5"
 # room "0.3" # size "0.3"
 ```
+
+# github_reference Usage
+```
+{% github_sample_ref URL_WITH_USERNAME_REPO_AND_FILE %}
+```
+
 {% github_sample_ref /bwillis/versioncake/989237901cb873f96df12be48cbf1239be496bd7/Appraisals %}
 
 [repo](https://github.com/pd3v/soundclips/blob/master/1.tidal)
