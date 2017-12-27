@@ -1,8 +1,35 @@
 <!DOCTYPE html>
 <html>
+<style>
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+</style>
 <body>
-
-<h1>pd3v.github.io</h1>
-
+  <canvas id="textCanvas" height = 50></canvas>
+  <canvas id="colorCanvas" ></canvas>
 </body>
+<script type="txt/javascript" src="Wave.min.js" />
+<script>
+var cTitle = document.getElementById("textCanvas");
+var ctxTitle = cTitle.getContext("2d");
+ctxTitle.font = "30px Verdana";
+ctxTitle.fillText("not sounding, yet.",10,40);
+
+var c = document.getElementById("colorCanvas");
+var ctx = c.getContext("2d");
+ctx.canvas.width  = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
+
+//Create gradient
+var grd = ctx.createLinearGradient(0,0,ctx.canvas.width,0);
+grd.addColorStop(0,"0000ff");
+grd.addColorStop(1,"0E96FF");
+
+// Fill with gradient
+ctx.fillStyle = grd;
+ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+</script>
 </html>
