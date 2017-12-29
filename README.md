@@ -2,5 +2,5 @@
 
 PlayGround.
 
-fluX
+fluX screen shot.
 ![fluX looks](/fluX%20screenshot.png)
