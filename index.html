@@ -58,6 +58,7 @@ ctx.canvas.width  = window.innerWidth;
 ctx.canvas.height = window.innerHeight;
 
 // Sound objects
+var AudioContext = window.AudioContext || window.webkitAudioContext;
 var ac = new AudioContext();
 var osc1 = ac.createOscillator();
 var osc2 = ac.createOscillator();
