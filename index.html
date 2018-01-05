@@ -38,10 +38,11 @@
     z-index: -1;
   }
   </style>
-  
   <title>pd3v sounding code</title>
   <meta charset="UTF-8">
+</head>
 <body>
+  <script type="text/javascript" src="synth.js"></script>
   <canvas id="colorCanvas"></canvas>
   <div id="top_bar">
     <div id="title">fluX</div>
@@ -50,7 +51,6 @@
   </div>
 </body>
 <script>
-
 // Page layout
 var c = document.getElementById("colorCanvas");
 var ctx = c.getContext("2d");
@@ -60,11 +60,7 @@ ctx.canvas.height = window.innerHeight;
 // Sound objects
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var ac = new AudioContext();
-var osc1 = ac.createOscillator();
-var osc2 = ac.createOscillator();
-var osc1Gain = ac.createGain();
-var osc2Gain = ac.createGain();
-var gainMix = ac.createGain();
+var synth = new Synth(ac);
 var analyser = ac.createAnalyser();
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
@@ -75,30 +71,16 @@ var freqOffset = 3;
 var detune = 0.0;
 var incDec = 1;
 var fps = 15;
-var waveType = waveTypes[(Math.random()*4).toFixed(0)];
+var waveType = waveTypes[(Math.random()*3).toFixed(0)];
 
-osc1.connect(osc1Gain);
-osc1.type = waveType;
-osc1.frequency.value = 220;
-
-osc2.connect(osc2Gain);
-osc2.type = waveType;
-osc2.frequency.value = 220;
-
-osc1Gain.gain.value = 0.5;
-osc2Gain.gain.value = 0.5;
-osc1Gain.connect(gainMix);
-osc2Gain.connect(gainMix);
-
-gainMix.connect(ac.destination);
-gainMix.gain.value = 0.99;
-
-osc1.start();
-osc2.start();
-
-gainMix.connect(analyser);
 analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
+
+synth.frequency = 220;
+synth.type = waveType;
+synth.connect(analyser);
+synth.connect(ac.destination);
+synth.start();
 
 vectorSynthesis();
 draw();
@@ -142,14 +124,12 @@ function vectorSynthesis(){
   } else if (detune < -freqOffset){
     incDec = 1;
   }
-  
   detune += 1 * incDec;
-  osc2.frequency.value += detune;
+  synth.detune += detune;
   
   if (detune < -freqOffset) {
     timeToRunOffset = (Math.random()*299.9+0.1).toFixed(1);
-  }
-  
+  }  
   setTimeout(vectorSynthesis, timeToRunOffset);
 }
 </script>

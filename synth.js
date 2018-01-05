@@ -1,60 +1,51 @@
-/*class Rectangle {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-  }
-  // Getter
-  get area() {
-    return this.calcArea();
-  }
-  // Method
-  calcArea() {
-    return this.height * this.width;
-  }
-}*/
 class Synth {
-  var osc2;
-  constructor(ac, osc1, osc2) {
-    //var ac = new AudioContext();
-    console.log(this, this.ac);
-    var osc1 = ac.createOscillator();
-    osc2 = ac.createOscillator();
-    var osc1Gain = ac.createGain();
-    var osc2Gain = ac.createGain();
-    var gainMix = ac.createGain();
-    var waveTypes = ['sine', 'triangle', 'sawtooth', 'square'];
-    var tune = osc2.frequency.value;
-    
-    var waveType = waveTypes[(Math.random()*4).toFixed(0)];
-    
-    osc1.connect(osc1Gain);
-    osc1.type = waveType;
-    osc1.frequency.value = 220;
-
-    osc2.connect(osc2Gain);
-    osc2.type = waveType;
-    osc2.frequency.value = 220;
-
-    osc1Gain.gain.value = 0.5;
-    osc2Gain.gain.value = 0.5;
-    
+  constructor(ac) {    
+    this.osc = ac.createOscillator();
+    this.vector = ac.createOscillator();
+    this.oscGain = ac.createGain();
+    this.vectorGain = ac.createGain();
+    this.mixGain = ac.createGain();
   }
   
-  get tune(){
-      return osc2.frequency.value;
+  get frequency(){
+      return this.osc.frequency.value;
   }
   
-  /*set tune(frequency) {
-    this.osc2.frequency.value = frequency;
-  }*/
+  set frequency(frequency) {
+      this.osc.frequency.value = frequency; 
+      this.vector.frequency.value = frequency; 
+  }
+  
+  get detune() {
+      return this.vector.frequency.value;
+  }
+  
+  set detune(frequency) {
+      this.vector.frequency.value = frequency; 
+  }
+  
+  get type(){
+      return this.osc.type;
+  }
+  
+  set type(type) {
+    this.osc.type = type;
+    this.vector.type = type;
+  }
   
   start() {
-    osc1.start();
-    osc2.start();
+    this.oscGain.gain.value = 0.5; 
+    this.vectorGain.gain.value = 0.5; 
+    this.mixGain.gain.value = 0.99;
+    this.osc.start();
+    this.vector.start();
   }
   
-  connect(nod) {
-    this.osc1Gain.connect(nod);
-    this.osc2Gain.connect(nod);
+  connect(destination) {
+    this.osc.connect(this.oscGain);
+    this.vector.connect(this.vectorGain);
+    this.oscGain.connect(this.mixGain);
+    this.vectorGain.connect(this.mixGain);
+    this.mixGain.connect(destination);
   }
 }
