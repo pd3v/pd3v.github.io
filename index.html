@@ -43,6 +43,7 @@
 </head>
 <body>
   <script type="text/javascript" src="synth.js"></script>
+  <!-- <script type="text/javascript" src="loopOsc.js"></script> -->
   <canvas id="colorCanvas"></canvas>
   <div id="top_bar">
     <div id="title">fluX</div>
@@ -52,8 +53,8 @@
 </body>
 <script>
 // Page layout
-var c = document.getElementById("colorCanvas");
-var ctx = c.getContext("2d");
+var canvas = document.getElementById("colorCanvas");
+var ctx = canvas.getContext("2d");
 ctx.canvas.width  = window.innerWidth;
 ctx.canvas.height = window.innerHeight;
 
@@ -65,25 +66,73 @@ var analyser = ac.createAnalyser();
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
 var waveTypes = ['sine', 'triangle', 'sawtooth', 'square'];
+var note = [55, 65.41, 82.41, 103.8, 110, 130.8, 164.8, 207.7, 220, 329.6, 415.3, 523.3, 659.3, 830.6]; //Am7 arpeggio
+var chromScale = [261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392.00, 415.30, 440.00, 466.16, 493.88, 523.25]; //Am7 arpeggio
+var beat = [500, 250, 125, 62.5, 166,67, 83,3];
+var vol = [0.9, 0.5, 0.1];
+
+/*261.63	131.87
+ C#4/Db4 	277.18	124.47
+D4	293.66	117.48
+ D#4/Eb4 	311.13	110.89
+E4	329.63	104.66
+F4	349.23	98.79
+ F#4/Gb4 	369.99	93.24
+G4	392.00	88.01
+ G#4/Ab4 	415.30	83.07
+A4	440.00	78.41
+ A#4/Bb4 	466.16	74.01
+B4	493.88	69.85
+C5	523.25*/
 
 var timeToRunOffset = 50;
 var freqOffset = 3;
 var detune = 0.0;
 var incDec = 1;
-var fps = 15;
+var counter = 0;
+var re = 60;
+var fps = 20; //15;
 var waveType = waveTypes[(Math.random()*3).toFixed(0)];
+var play = 1;
+var cont = 0;
 
 analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
 
-synth.frequency = 220;
+
+
+/*synth.frequency = 220;
 synth.type = waveType;
 synth.connect(analyser);
-synth.connect(ac.destination);
-synth.start();
+synth.connect(ac.destination);*/
+//delay.connect(ac.destination);
+//synth.start();
 
-vectorSynthesis();
+//vectorSynthesis();
+//melodyGenerator();
+genPat = function () {
+  return (Math.random()*5).toFixed(0)
+}
+sequencer(90, [], genPat());
 draw();
+
+
+
+/*for (var i = 0; i < 100; i++) {
+    (function(i) {
+        setTimeout(function() { 
+          console.log('osc'+i); 
+          var osc = ac.createOscillator();
+          //osc.gain.value = 0.9;
+          //this.oscGain.gain.value
+          osc.connect(ac.destination);
+          osc.start(ac.currentTime);
+          osc.stop(ac.currentTime+0.5);
+        }, 2000);
+    })(i);
+}*/
+
+
 
 function draw() {
   var sliceWidth = ctx.canvas.width * 1.1 / bufferLength;
@@ -118,7 +167,97 @@ function draw() {
   ctx.stroke();
 };
 
-function vectorSynthesis(){
+function sequencer(bpm=120, pattern, patternGenCallBack){
+  //console.log(bpm, pattern, pattern.length, pattern[cont%pattern.length], patternGenCallBack);
+  console.log(bpm, patternGenCallBack);
+  let note = (Math.random()*1000).toFixed(2);
+  let beat = [0, 31.25, 62.5, 125, 250, 500, 1000, 2000, 4000];
+  //var s = [0, 0, 0, 0, 1, 1, 1, 2, 2, 1, 1, 1, 3, 2,2, 0, 0, 2, 1, 1, 1, 2];
+  //pattern = [5, 5, 6, 6, 6, 4, 4, 4, 4, 8, 3, 3, 4, 4, 2, 2, 2, 2, 7];
+  //var pattern = [6, 4, 2, 2, 4];
+  //var pattern = [4, 4, 5, 3, 3];
+  /*var s = [[0, 0, 2],  [2, 2], [1,1,1, 2]];
+  var t = s[play];
+  var a = 50 * (Math.random() * 10 + 1);
+  timeToRunOffset = (Math.random()*6).toFixed(0);*/
+  //if (play == 1) {
+    
+    //synth.playNote(0.5, 0.1);
+    //synth.start(0.05);
+    //synth.stop(0.1);
+    synth = new Synth(ac); //ac.createOscillator();
+    synth.type = waveTypes[(Math.random()*3).toFixed(0)];
+    
+    //synth.osc.frequency.setValueAtTime(chromScale[(Math.random()*10).toFixed(0)], 0);
+    
+    //synth.frequency = chromScale[(Math.random()*10).toFixed(0)];
+    //synth.gain = 0.1;
+    synth.frequency = note < 40 ? 0 : note, 0;
+    synth.adsr = [0.05, 0, 0.05, 0.01];
+    synth.connect(analyser);
+    synth.connect(ac.destination);
+    synth.start(ac.currentTime+synth.adsr[0]);
+    if (pattern.length > 0) {
+      console.log(0);
+      synth.stop(ac.currentTime+(beat[pattern[cont%pattern.length]]/1000)/(bpm/60)+synth.adsr[3]);
+    } else if (pattern.length == 0) {
+      console.log('diff 0');
+      synth.stop(ac.currentTime+(beat[patternGenCallBack]/1000)/(bpm/60)+synth.adsr[3]);
+    }
+    /*let beatIndex = (Math.random()*8).toFixed(0);
+    synth.stop(ac.currentTime+(beat[beatIndex]/1000)/(bpm/60));*/
+    //synth.stop(ac.currentTime+0.2);
+    
+    
+    //synth.sus(0.5);
+      /*play = 0;
+  } else if (!play){
+    //console.log("dont play");
+    //a = 0.0;
+    //synth.att(0.0, 0.25);
+    synth.playNote(0.0, 0.25);
+    play = 1;
+  }*/
+  
+  //synth.att(a);
+  //play = play == true ? false : true;
+  //synth.start();
+  //synth.stop();
+  //setTimeout(beatGenerator, beat[timeToRunOffset]*(Math.random(8)+1));
+  //setTimeout(beatGenerator, Math.random() * 1000);
+  //console.log(t.length, cont%t.length, t);
+  //setTimeout(sequencer, ar[t[cont%t.length]]);
+  if (pattern.length > 0) {
+    setTimeout(sequencer, beat[pattern[cont%pattern.length]]/(bpm/60), bpm, pattern);
+  } else {
+    setTimeout(sequencer, beat[patternGenCallBack]/(bpm/60), bpm, genPat());
+  }
+
+  cont++;
+}
+
+function melodyGenerator(){
+  
+  /*if (detune < -freqOffset) {
+    timeToRunOffset = (Math.random()*299.9+0.1).toFixed(1);§
+    //synth.frequency = (Math.random()*800+40).toFixed(0)
+    synth.frequency = note[(Math.random()*5).toFixed(0)];
+    console.log(synth.frequency);
+  }*/
+  counter += 1;
+  if (counter >= re) {
+    timeToRunOffset = (Math.random()*6).toFixed(0);
+    //console.log(counter);
+    re = Math.random()*4+1;
+    counter = 0;
+    synth.frequency = note[(Math.random()*chromScale.length).toFixed(0)]*(Math.random()*2+1).toFixed(0);
+    //synth.frequency = (Math.random()*1000+40).toFixed(2);
+  }
+   //note[(Math.random()*note.length).toFixed(0)];
+  setTimeout(melodyGenerator, beat[timeToRunOffset]*(Math.random(8)+1));
+}
+
+/*function vectorSynthesis(){
   if (detune > freqOffset) {
     incDec = -1;
   } else if (detune < -freqOffset){
@@ -129,8 +268,8 @@ function vectorSynthesis(){
   
   if (detune < -freqOffset) {
     timeToRunOffset = (Math.random()*299.9+0.1).toFixed(1);
-  }  
+  }
   setTimeout(vectorSynthesis, timeToRunOffset);
-}
+}*/
 </script>
 </html>
