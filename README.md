@@ -1,6 +1,7 @@
 # pd3v.github.io
 
-PlayGround.
+Homepage playGround.
 
-fluX screen shot.
-![fluX looks](/fluX%20screenshot.png)
+fluX is a nano API for generative music.
+
+![fluX looks](/fluX_0.0.1_gen.mov)
