@@ -1,5 +1,5 @@
 class Synth {
-  constructor(ac) {    
+  constructor(ac, adsr=[0.05, 0, 0.05, 0.05]) {    
     this.osc = ac.createOscillator();
     this.vector = ac.createOscillator();
     this.oscGain = ac.createGain();

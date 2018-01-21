@@ -1,11 +1,12 @@
 class Synth {
-  constructor(ac) {    
+  constructor(ac, adsr=[0.05, 0, 0.05, 0.05]) {    
     this.osc = ac.createOscillator();
-    this.adsrEnv = [0.01, 0, 1, 0.4];
+    this.oscGain = ac.createGain();
+    this.adsrEnv = adsr;
   }
   
   get type() {
-      return this.osc.type;
+    return this.osc.type;
   }
   
   set type(type) {
@@ -13,7 +14,7 @@ class Synth {
   }
   
   get frequency() {
-      return this.osc.frequency.value;
+    return this.osc.frequency.value;
   }
   
   set frequency(frequency) {
@@ -28,12 +29,17 @@ class Synth {
     this.adsrEnv = value;
   }
   
-  set frequency(frequency) {
-    this.osc.frequency.setValueAtTime(frequency, 0);
+  get gain() {
+    return this.oscGain.gain.value;
+  }
+  
+  set gain(value) {
+    this.oscGain.gain.setValueAtTime(value, 0);
   }
 
   connect(destination) {
-    this.osc.connect(destination);
+    this.osc.connect(this.oscGain);
+    this.oscGain.connect(destination);
   }
   
   start(time=0) {
