@@ -44,6 +44,9 @@
 <body>
   <script type="text/javascript" src="synth.js"></script>
   <script type="text/javascript" src="sequencer.js"></script>
+  <!-- <script type="text/javascript" src="midiout.js"></script>
+  <script type="text/javascript" src="midiout1.js"></script> -->
+  <script type="text/javascript" src="loopsynth.js"></script>
   <canvas id="colorCanvas"></canvas>
   <div id="top_bar">
     <div id="title">fluX</div>
@@ -70,7 +73,7 @@ var cont = 0;
 analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
 
-Sequencer.synth('Synth').start(120, [8,8,4, 16,16,16,16]);
+Sequencer.synth('Synth').start(240, [32]);
 
 drawWave();
 
