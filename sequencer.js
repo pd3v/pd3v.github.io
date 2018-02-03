@@ -44,7 +44,7 @@ class Sequencer {
     if (note == null || note < 40) {note = 0;}
     
     let asynth = eval('new '+Sequencer.sType);
-    asynth.type = 'sawtooth'; waveTypes[(Math.random()*3).toFixed(0)];
+    asynth.type = waveTypes[(Math.random()*3).toFixed(0)];
     
     asynth.frequency = note*octave;
     asynth.adsr = [0.0, 0.0, (beat[Sequencer.spattern[cont%Sequencer.spattern.length]]/1000)/(Sequencer.sbpm/60), 0.01];
