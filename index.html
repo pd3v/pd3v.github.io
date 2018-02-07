@@ -43,10 +43,8 @@
 </head>
 <body>
   <script type="text/javascript" src="synth.js"></script>
+  <script type="text/javascript" src="generator.js"></script>
   <script type="text/javascript" src="sequencer.js"></script>
-  <!-- <script type="text/javascript" src="midiout.js"></script>
-  <script type="text/javascript" src="midiout1.js"></script> -->
-  <script type="text/javascript" src="loopsynth.js"></script>
   <canvas id="colorCanvas"></canvas>
   <div id="top_bar">
     <div id="title">fluX</div>
@@ -68,12 +66,14 @@ var analyser = ac.createAnalyser();
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
 var fps = 20;
-var cont = 0;
 
 analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
 
-Sequencer.synth('Synth').start(240, [32]);
+let bluesPenatonic = {'c':'0', 'd#':'3', 'f':'5', 'f#':'6', 'g':'7', 'a#':'10'};
+let pattern = [64, 32, 4, 16, 8, 8, 64, 32, 16, 16];
+
+Sequencer.generator(bluesPenatonic).synth('Synth').start(120, pattern);
 
 drawWave();
 
