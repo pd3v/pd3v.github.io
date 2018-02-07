@@ -15,8 +15,6 @@ class Sequencer {
   }
   
   static set generator(scale) {
-    console.log('new Generator('+scale+','+f+')');
-    //Sequencer.sGen = eval('new Generator('+scale+','+f+')');
     Sequencer.sGen = eval('new Generator('+JSON.stringify(scale)+')');
   }
   
@@ -42,8 +40,6 @@ class Sequencer {
   }
 
   static generator(scale) {
-    //console.log('new Generator('+scale+','+f+')');
-    console.log('new Generator('+scale+')', JSON.stringify(scale));
     Sequencer.sCounter = 1;
     Sequencer.sGen = eval('new Generator('+JSON.stringify(scale)+')');
     return this; 
