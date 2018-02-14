@@ -15,13 +15,7 @@ class Sequencer {
   }
   
   static set generator(scale) {
-<<<<<<< HEAD
-    //console.log('new Generator('+JSON.stringify(scale)+','+f+')');
-    //Sequencer.sGen = eval('new Generator('+scale+','+f+')');
-    Sequencer.sGen = eval('new Generator('+JSON.stringify(scale)+','+f+')');
-=======
     Sequencer.gen = eval('new Generator('+JSON.stringify(scale)+','+f+')');
->>>>>>> 0.0.2.2
   }
   
   get bpm() {
