@@ -70,10 +70,52 @@ var fps = 20;
 analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
 
-let bluesPenatonic = {'c':'0', 'd#':'3', 'f':'5', 'f#':'6', 'g':'7', 'a#':'10'};
-let pattern = [64, 32, 4, 16, 8, 8, 64, 32, 16, 16];
 
-Sequencer.generator(bluesPenatonic).synth('Synth').start(120, pattern);
+let BluesScale = {'c':0, 'd#':3, 'f':5, 'f#':6, g:7, 'a#':10};
+//let pattern = [16];
+let pattern = [8,8,3,3,3,8,8];
+
+let f = _ => { 
+  let l = Object.values(BluesScale).length-1;
+  let ra = l => {
+    return (Math.random()*l).toFixed(0)
+  };
+  
+  if (Sequencer.sCounter%50 == 0) {
+    return {note:4, octave: 24};
+  } else {
+    return {note:Sequencer.sCounter%5, octave:12*ra(l)};
+  }
+}
+
+var a = 0;
+var t = true;
+
+let g = _ => { 
+  let l = Object.values(BluesScale).length;  
+  console.log(Sequencer.sCounter+'<->'+Sequencer.sCounter%l+' lenght:'+l);
+  //console.log(a++, t);
+  if (Sequencer.sCounter%(Math.random()*l+1) == 0) {
+      t = !t;
+      console.log("entrou:"+t);
+  }
+  
+  //console.log(t, Sequencer.sCounter%l);
+  if (t) {
+    console.log(Sequencer.sCounter%l);
+    return {note:(Sequencer.sCounter%l), octave: 3};
+  }
+  
+  if (!t) {
+    console.log(l, l-Sequencer.sCounter%l-1);
+    return {note:l-Sequencer.sCounter%l-1, octave:4};
+  }
+  
+  //return {note:0, octave:4};
+}
+
+Sequencer.generator(BluesScale, g).synth('Synth').start(120, pattern);
+//Seq.gen({'+22'}, 293.66).midi('device','port').start(240, [16]);
 
 drawWave();
 

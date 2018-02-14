@@ -15,7 +15,9 @@ class Sequencer {
   }
   
   static set generator(scale) {
-    Sequencer.sGen = eval('new Generator('+JSON.stringify(scale)+')');
+    //console.log('new Generator('+JSON.stringify(scale)+','+f+')');
+    //Sequencer.sGen = eval('new Generator('+scale+','+f+')');
+    Sequencer.sGen = eval('new Generator('+JSON.stringify(scale)+','+f+')');
   }
   
   get bpm() {
@@ -39,9 +41,12 @@ class Sequencer {
     return this; 
   }
 
-  static generator(scale) {
+  static generator(scale, f) {
+    //console.log('new Generator('+scale+','+f+')');
+    //console.log('new Generator('+scale+')', JSON.stringify(scale));
+    console.log('new Generator('+JSON.stringify(scale)+','+f+')');
     Sequencer.sCounter = 1;
-    Sequencer.sGen = eval('new Generator('+JSON.stringify(scale)+')');
+    Sequencer.sGen = eval('new Generator('+JSON.stringify(scale)+','+f+')');
     return this; 
   }
   
@@ -69,5 +74,6 @@ class Sequencer {
     };
     
     Sequencer.sCounter++;
+    Sequencer.sGen.counter = Sequencer.sCounter;
   }
 }
