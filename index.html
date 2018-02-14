@@ -70,10 +70,20 @@ var fps = 20;
 analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
 
-let bluesPenatonic = {'c':'0', 'd#':'3', 'f':'5', 'f#':'6', 'g':'7', 'a#':'10'};
-let pattern = [64, 32, 4, 16, 8, 8, 64, 32, 16, 16];
+let bluesScale = {'c':0, 'd#':3, 'f':5, 'f#':6, g:7, 'a#':10};
+let pattern = [8,8,3,3,3,8,8,4];
 
-Sequencer.generator(bluesPenatonic).synth('Synth').start(120, pattern);
+let scaleLength = Object.values(bluesScale).length;
+
+// Gen funtion to random Blues scale notes and random octaves
+let f = _ => {
+  let randomNote = (Math.random()*Sequencer.counter%(scaleLength-1)).toFixed(0);
+  let randomOctave = Math.random()*3+2;
+  return {note: randomNote, octave: randomOctave};
+}
+
+// Sequencer plays Generator produced notes sounding from Synth
+Sequencer.generator(bluesScale, f).synth('Synth').start(120, pattern);
 
 drawWave();
 
