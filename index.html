@@ -71,19 +71,33 @@ analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
 
 let bluesScale = {'c':0, 'd#':3, 'f':5, 'f#':6, g:7, 'a#':10};
-let pattern = [8,8,3,3,3,8,8,4];
+//let pattern = [3,3,3,8,8];
+let pattern = [16];
 
+// generate Blues scale random notes and random octaves
 let scaleLength = Object.values(bluesScale).length;
-
-// Gen funtion to random Blues scale notes and random octaves
 let f = _ => {
   let randomNote = (Math.random()*Sequencer.counter%(scaleLength-1)).toFixed(0);
-  let randomOctave = Math.random()*3+2;
+  let randomOctave = (Math.random()*4+2).toFixed(0);
   return {note: randomNote, octave: randomOctave};
 }
 
-// Sequencer plays Generator produced notes sounding from Synth
-Sequencer.generator(bluesScale, f).synth('Synth').start(120, pattern);
+var ascending = false;
+
+let g = _ => { 
+  let scaleIndex = Sequencer.counter%scaleLength;
+  if (scaleIndex == 0) {
+      ascending = !ascending;
+  }
+  
+  if (ascending) {
+    return {note: scaleIndex, vel:scaleIndex>=2 && scaleIndex<=4? 127: 39, octave: 4};
+  } else {
+    return {note:scaleLength-scaleIndex-1, vel:scaleLength-scaleIndex-1>=2 && scaleLength-scaleIndex-1<=4? 26: 127, octave:5, };
+  }
+}
+
+Sequencer.generator(bluesScale, g).synth('Synth').start(120, pattern)
 
 drawWave();
 

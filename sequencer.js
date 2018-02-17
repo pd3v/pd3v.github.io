@@ -55,7 +55,8 @@ class Sequencer {
     let asynth = eval('new '+Sequencer.synth);
     asynth.waveType = waveTypes[(Math.random()*3).toFixed(0)];
     
-    asynth.frequency = Sequencer.gen.note;
+    asynth.note = Sequencer.gen.note.note;
+    asynth.gain = Sequencer.gen.note.vel;
     asynth.adsr = [0.0, 0.0, (beat[Sequencer.spattern[Sequencer.counter%Sequencer.spattern.length]]/1000)/(Sequencer.sbpm/60), 0.01];
   
     asynth.connect(analyser);    
