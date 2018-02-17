@@ -75,7 +75,6 @@ let bluesScale = {'c':0, 'd#':3, 'f':5, 'f#':6, g:7, 'a#':10};
 let pattern = [16];
 
 // generate Blues scale random notes and random octaves
-
 let scaleLength = Object.values(bluesScale).length;
 let f = _ => {
   let randomNote = (Math.random()*Sequencer.counter%(scaleLength-1)).toFixed(0);
