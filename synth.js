@@ -38,11 +38,11 @@ class Synth {
     this.adsrEnv = value;
   }
   
-  get gain() {
+  get vel() {
     return this.oscGain.gain.value;
   }
   
-  set gain(value) {
+  set vel(value) {
     this.oscGain.gain.setValueAtTime(this.MIDIValueToAmp(value), 0);
   }
 

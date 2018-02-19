@@ -57,7 +57,7 @@ class Sequencer {
     
     let noteObject = Sequencer.gen.note;
     asynth.note = noteObject.note;
-    asynth.gain = noteObject.vel;
+    asynth.vel = noteObject.vel;
     asynth.adsr = [0.0, 0.0, (beat[Sequencer.spattern[Sequencer.counter%Sequencer.spattern.length]]/1000)/(Sequencer.sbpm/60), 0.01];
   
     asynth.connect(analyser);    
