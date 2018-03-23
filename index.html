@@ -94,7 +94,7 @@ analyser.getByteTimeDomainData(dataArray);
 
 var audio = document.querySelector('audio');
 
-if (navigator.mediaDevices) {
+/*if (navigator.mediaDevices) {
     navigator.mediaDevices.getUserMedia ({audio: true, video: false})
     .then(function(stream) {
         var source = ac.createMediaStreamSource(stream);
@@ -105,7 +105,7 @@ if (navigator.mediaDevices) {
     });
 } else {
    console.log('getUserMedia not supported on your browser!');
-}
+}*/
 
 const CMinorScale = {'c':0, 'd':2, 'ef':3, 'f':5, 'g':7, 'af':8, 'bb':10};
 const scaleLength = Object.values(CMinorScale).length;
