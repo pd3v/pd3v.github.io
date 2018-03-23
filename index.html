@@ -10,6 +10,23 @@
   #top_bar {
     margin: 0px;
   }
+  #gen_algorithm {
+    overflow-y: auto;
+    width: 35%;
+    margin: 5px;
+    padding: 5px;
+    font-family: "menlo", sans-serif;
+    float: right;
+    z-index: -2;
+  }
+  #code {
+    color: #ffffff7a;
+    font-size: 15px;
+  }
+  #code span {
+    color: #ffffff4a;
+    font-size: 12px;
+  }
   #title {
     font-family: "menlo", sans-serif;
     font-size: 40px;
@@ -42,14 +59,19 @@
   <meta charset="UTF-8">
 </head>
 <body>
+  <script type="text/javascript" src="midiout.js"></script>
   <script type="text/javascript" src="synth.js"></script>
   <script type="text/javascript" src="generator.js"></script>
   <script type="text/javascript" src="sequencer.js"></script>
+  <script type="text/javascript" src="helpers.js"></script>
   <canvas id="colorCanvas"></canvas>
   <div id="top_bar">
     <div id="title">fluX</div>
     <div id="version">0.0.1</div>
     <div id="subtitle">sounding</div>
+  </div>
+  <div id="gen_algorithm">
+    <div id="code">gen::</div>
   </div>
 </body>
 <script>
@@ -70,47 +92,91 @@ var fps = 20;
 analyser.fftSize = 2048;
 analyser.getByteTimeDomainData(dataArray);
 
-let bluesScale = {'c':0, 'd#':3, 'f':5, 'f#':6, g:7, 'a#':10};
-let pattern = [3,3,3,8,8,16,16,4,8];
-let scaleLength = Object.values(bluesScale).length;
+var audio = document.querySelector('audio');
 
-var ascending = true;
+if (navigator.mediaDevices) {
+    navigator.mediaDevices.getUserMedia ({audio: true, video: false})
+    .then(function(stream) {
+        var source = ac.createMediaStreamSource(stream);
+        source.connect(analyser);
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+} else {
+   console.log('getUserMedia not supported on your browser!');
+}
 
-// generate a Blues scale's random number of ascending or descending notes
-let g = _ => { 
-  let scaleIndex = Sequencer.counter%scaleLength;
-  if (scaleIndex*Math.random().toFixed(0) == 0) {
-    ascending = !ascending;
+const CMinorScale = {'c':0, 'd':2, 'ef':3, 'f':5, 'g':7, 'af':8, 'bb':10};
+const scaleLength = Object.values(CMinorScale).length;
+
+// function composition is using Markov Chains
+const composition = scale => {
+  let composition = [];
+  let phrasings = {};
+
+	for (let i = 0; i < 20; i++){
+    composition.push(round(rand(0,Object.keys(scale).length-1)));
+	}
+
+  for (let j = 0; j < composition.length-1; j++) {
+    if (!phrasings[composition[j]]) {
+      phrasings[composition[j]]=[];
+    }
+    phrasings[composition[j]].push(composition[j+1]);
   }
-  
-  if (ascending) {
-    return {note: scaleIndex, vel:scaleIndex>=2 && scaleIndex<=4? 127: 39, octave: 4};
-  } else {
-    return {note:scaleLength-scaleIndex-1, vel:scaleLength-scaleIndex-1>=2 && scaleLength-scaleIndex-1<=4? 15: 127, octave:5};
+  return {phrasings, scale};
+}
+
+let compositionObj;
+f = _ => {
+  let phrasing;
+  let note;
+  let noteIndex;
+
+  // Every 50 notes generate new phrasings
+  if (counter()%50 == 0) {
+      compositionObj = composition(CMinorScale);
+  }
+
+  phrasing = compositionObj.phrasings[(Object.keys(compositionObj.phrasings))[countTo(Object.keys(compositionObj.phrasings).length-1)]];
+  noteIndex = round(rand(0,phrasing.length-1))
+  return {
+    note:phrasing[noteIndex], // randoms note from phrasing
+    vel:127*(1-((noteIndex+1)/(phrasing.length))*0.5), // the smaller the phrasing higher the note's velocity
+    dur:round((2**(phrasing.length))), // the bigger the phrasing shorter the note's duration
+    oct:Math.trunc(scaleTo(0,5,1,5,round(phrasing.reduce((accum, value)=>{
+      accum += value;
+      return accum;
+    })/phrasing.length))) // averages the phrasing content
   }
 }
 
-Sequencer.generator(bluesScale, g).synth('Synth').start(120, pattern)
+// Sequencer.generator(CMinorScale).midiOut('midi port1').start(140);
+Sequencer.generator(CMinorScale, f).synth('Synth').start(140);
+
+document.getElementById("code").innerHTML += '<span>'+composition+f+'</span>';
 
 drawWave();
 
 function drawWave() {
   var sliceWidth = ctx.canvas.width * 1.1 / bufferLength;
   var x = 0;
-  
+
   analyser.getByteTimeDomainData(dataArray);
-  
+
   ctx.lineWidth = 0.5;
-  ctx.strokeStyle = '#FFFFFF';
-  
+  ctx.strokeStyle = '#999999';
+  ctx.stroke();
+
   setTimeout(function() {
        requestAnimationFrame(drawWave);
 
-       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);    
+       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
        ctx.beginPath();
-       
-       for(var i = 0; i < bufferLength; i++) { 
+
+       for(var i = 0; i < bufferLength; i++) {
          var v = dataArray[i] / 128.0;
          var y = v * ctx.canvas.height/2;
 
@@ -122,7 +188,7 @@ function drawWave() {
          x += sliceWidth;
        }
    }, 1000 / fps);
-  
+
   ctx.lineTo(ctx.canvas.width, ctx.canvas.height);
   ctx.stroke();
 };

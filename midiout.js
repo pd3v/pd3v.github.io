@@ -1,59 +1,48 @@
-/*if (navigator.requestMIDIAccess) {
-    console.log('Browser supports MIDI!');
-}*/
+class MidiOut {
+  constructor(midiOutNamePort){
+		MidiOut.namePort = midiOutNamePort;
 
-if (navigator.requestMIDIAccess) {
-    navigator.requestMIDIAccess()
-        .then(success, failure);
-}
-
-function success(midi) {
-  console.log("function success(midi)");
-  //var inputs = midi.inputs.values();
-  var outputs = midi.outputs.values();
-  /*for (var input = inputs.next();
-     input && !input.done;
-     input = inputs.next()) {
-    // each time there is a midi message call the onMIDIMessage function
-    input.value.onmidimessage = onMIDIMessage;
-  }*/
-  
-  /*for (var output = outputs.next(); output && !output.done; output = outputs.next()) {
-    // each time there is a midi message call the onMIDIMessage function
-    output.value.onmidimessage = onMIDIMessage;
-  } 
-  console.log('Got outputs:', outputs);*/
-  var aaa = undefined;
-  for (var entry of midi.outputs) {
-    var output = entry[1];
-    console.log( "Output port [type:'" + output.type + "'] id:'" + output.id +
-      "' manufacturer:'" + output.manufacturer + "' name:'" + output.name +
-      "' version:'" + output.version + "'" );
-      aaa = output.id;
+    if (navigator.requestMIDIAccess) {
+        navigator.requestMIDIAccess().then(this.success, this.failure);
+    }
   }
-  sendMiddleC(outputs, aaa);
+
+  get outputMIDI() {
+    return this.moutputMIDI;
+  }
+
+  set outputMIDI(value){
+    this.moutputMIDI = value;
+  }
+
+  success(midi) {
+    MidiOut.allmidi = midi;
+
+  	for (var out of MidiOut.allmidi.outputs.values()) {
+			if (out.name == MidiOut.namePort) {
+    		MidiOut.moutputMIDI = out;
+    		break;
+			} else {
+				throw `"${MidiOut.namePort}" not a MIDI output.`;
+			}
+  	}
+  }
+
+  sendNote(noteObject) {
+    if (MidiOut.moutputMIDI != undefined) {
+      const noteOnMessage = [0x90, noteObject.note, noteObject.vel];
+      const noteOffMessage = [0x80, noteObject.note, 0x00];
+
+      MidiOut.moutputMIDI.send(noteOnMessage);
+      MidiOut.moutputMIDI.send(noteOffMessage, window.performance.now()+noteObject.dur);
+    }
+  }
+
+  failure() {
+    throw 'No MIDI found';
+  }
+
+  onMIDIMessage (message) {
+    console.log('onMIDIMessage ', message.data);
+  }
 }
-
-function failure() {
-  console.log('Not midi found');
-}
-
-function onMIDIMessage (message) {
-    console.log('onMIDIMessage', message.data);
-}
-
-
-function sendMiddleC( midiAccess, portID ) {
-  console.log(midiAccess, portID);
-  var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
-  var output = midiAccess.outputs.get(portID);
-  output.send( noteOnMessage );  //omitting the timestamp means send immediately.
-  output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,                                                                        
-  // release velocity = 64, timestamp = now + 1000ms.
-}
-
-/*var input = midi.input.values();
-
-for (var i = 0; i < 100; i++) {
-  console.log(input[i]);
-}*/
