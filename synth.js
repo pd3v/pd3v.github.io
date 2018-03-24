@@ -7,7 +7,6 @@ class Synth {
   engine(){
     this.osc = ac.createOscillator();
     this.oscGain = ac.createGain();
-    this.osc.type = 'sawtooth';
   }
 
   MIDINoteToFreq(midiNote) {
