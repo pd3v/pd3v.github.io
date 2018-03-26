@@ -141,6 +141,11 @@ f = _ => {
 
 // SynthFM is an extension of the Synth class
 class SynthFM extends Synth {
+  constructor(){
+    super();
+    clog('SynthFM');
+  }
+  
   engine() {
     this.carrier = ac.createOscillator();
     this.carrierGain = ac.createGain();
@@ -195,7 +200,7 @@ class SynthFM extends Synth {
   }
 }
 
-Sequencer.generator(CMinorScale, f).synth('SynthFM').start(140);
+Sequencer.generator(CMinorScale, f).synth('Synth').start(140);
 
 document.getElementById("code").innerHTML += '<span>'+composition+f+'</span>';
 
