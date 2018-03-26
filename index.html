@@ -122,7 +122,7 @@ f = _ => {
   let noteIndex;
 
   // Every 50 notes generate new phrasings
-  if (counter()%50 == 0) {
+  if (counter()%25 == 0) {
       compositionObj = composition(CMinorScale);
   }
 
@@ -139,68 +139,8 @@ f = _ => {
   }
 }
 
-// SynthFM is an extension of the Synth class
-class SynthFM extends Synth {
-  constructor(){
-    super();
-    clog('SynthFM');
-  }
-  
-  engine() {
-    this.carrier = ac.createOscillator();
-    this.carrierGain = ac.createGain();
-    this.modulator = ac.createOscillator();
-    this.modulator.frequency.setValueAtTime(70, 0);
-    this.modulatorGain = ac.createGain();
-    this.modulatorGain.gain.setValueAtTime(50, 0)
-
-    this.modulator.connect(this.modulatorGain);
-  }
-
-  set onended(f) {
-    this.carrier.onended = f;
-  }
-
-  get note() {
-    return this.carrier.frequency.value;
-  }
-
-  set note(note) {
-    this.carrier.frequency.setValueAtTime(this.MIDINoteToFreq(note), 0);
-  }
-
-  get vel() {
-    return this.carrierGain.gain.value;
-  }
-
-  set vel(value) {
-    this.carrierGain.gain.setValueAtTime(this.MIDIVelToAmp(value), 0);
-  }
-
-  connect(destination) {
-    this.modulatorGain.connect(this.carrier.frequency);
-    this.carrier.connect(destination);
-  }
-
-  disconnect(time=0) {
-    this.modulator.disconnect(time);
-    this.modulatorGain.disconnect(time);
-    this.carrier.disconnect(time);
-    this.carrierGain.disconnect(time);
-  }
-
-  start(time=0) {
-    this.modulator.start(time);
-    this.carrier.start(time);
-  }
-
-  stop(time=0) {
-    this.modulator.stop(time);
-    this.carrier.stop(time);
-  }
-}
-
-Sequencer.generator(CMinorScale, f).synth('Synth').start(140);
+Sequencer.audioContext = ac;
+Sequencer.generator(CMinorScale, f).synth('Synth', {a:0,d:0,r:0.3}).start(140);
 
 document.getElementById("code").innerHTML += '<span>'+composition+f+'</span>';
 
