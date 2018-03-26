@@ -59,7 +59,7 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <script type="text/javascript" src="midiout.js"></script>
+  <script type="text/javascript" src="../fluX/midiout.js"></script>
   <script type="text/javascript" src="synth.js"></script>
   <script type="text/javascript" src="generator.js"></script>
   <script type="text/javascript" src="sequencer.js"></script>
@@ -121,7 +121,7 @@ f = _ => {
   let note;
   let noteIndex;
 
-  // Every 50 notes generate new phrasings
+  // Every 25 notes generate new phrasings
   if (counter()%25 == 0) {
       compositionObj = composition(CMinorScale);
   }
