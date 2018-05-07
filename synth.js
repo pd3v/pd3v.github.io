@@ -112,6 +112,10 @@ class SynthFM extends Synth {
     this.modulator.connect(this.modulatorGain);
   }
 
+  set waveType(type) {
+    this.carrier.type = type;
+  }
+
   get note() {
     return this.carrier.frequency.value;
   }

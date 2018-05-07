@@ -66,7 +66,7 @@ class Sequencer {
         asynth.audioContext = Sequencer.ac;
 
         const noteObject = Sequencer.beatToMiliSeconds(Sequencer.gen.note);
-        asynth.waveType = 'sawtooth';
+        // asynth.waveType = 'sawtooth';
         asynth.note = noteObject.note;
         asynth.vel = noteObject.vel;
         asynth.adsr = adsr;
