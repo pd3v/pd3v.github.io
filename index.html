@@ -138,7 +138,7 @@ f = _ => {
 }
 
 Sequencer.audioContext = ac; // fix
-Sequencer.generator(CMinorScale, f).synth('Synth',{a:0,d:0,r:0.5}).start(140);
+Sequencer.generator(CMinorScale, f).synth('Synth',{a:0,d:0,r:0.7}).start(140);
 
 document.getElementById("code").innerHTML += '<span>'+composition+f+'</span>';
 
