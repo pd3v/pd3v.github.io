@@ -3,8 +3,12 @@ class Sequencer {
     return Sequencer.ac;
   }
 
-  static set audioContext(value) {
-    Sequencer.ac = value;
+  static get notePlaying() {
+    return Sequencer.snotePlaying;
+  }
+
+  static set notePlaying(value){
+    Sequencer.snotePlaying = value;
   }
 
   get synth() {
@@ -61,23 +65,24 @@ class Sequencer {
       Sequencer.play = function() {
         const asynth = eval('new '+Sequencer.synth);
         if (!Sequencer.ac) {
-          throw 'Sequencer has no audio context.';
+          throw 'No audio context set.';
         }
         asynth.audioContext = Sequencer.ac;
 
         const noteObject = Sequencer.beatToMiliSeconds(Sequencer.gen.note);
-        // asynth.waveType = 'sawtooth';
+        asynth.waveType = 'sawtooth';
         asynth.note = noteObject.note;
         asynth.vel = noteObject.vel;
         asynth.adsr = adsr;
         asynth.adsr.s = noteObject.dur/1000;
 
-        asynth.connect(scope); // fix
-        asynth.connect(Sequencer.ac.destination);
+        Sequencer.notePlaying = noteObject;
 
+        // asynth.connect(scope); // fix
+        asynth.connect(Sequencer.ac.destination);
         asynth.start();
 
-        setTimeout(Sequencer.start, noteObject.dur, Sequencer.sbpm, Sequencer.spattern);
+        setTimeout(Sequencer.start, noteObject.dur, Sequencer.ac, Sequencer.sbpm, Sequencer.spattern);
       }
       return this;
     }
@@ -90,8 +95,10 @@ class Sequencer {
       Sequencer.play = function() {
         const noteObject = Sequencer.gen.note;
 
+        Sequencer.notePlaying = noteObject;
+
         Sequencer.midiOut.sendNote(Sequencer.beatToMiliSeconds(noteObject));
-        setTimeout(Sequencer.start, Sequencer.beatToMiliSeconds(noteObject.dur), Sequencer.sbpm, Sequencer.spattern);
+        setTimeout(Sequencer.start, Sequencer.beatToMiliSeconds(noteObject.dur), null, Sequencer.sbpm, Sequencer.spattern);
       }
       return this;
     }
@@ -105,13 +112,10 @@ class Sequencer {
     return this;
   }
 
-  static start(bpm=90, pattern=[4]) {
+  static start(audioContext, bpm=90, pattern=[4]) {
+    Sequencer.ac = audioContext;
     Sequencer.sbpm = bpm;
     Sequencer.spattern = pattern;
-
-    if (!Sequencer.play || Sequencer.play == null) {
-      throw 'No synth or MIDI output set.'
-    }
 
     Sequencer.play();
 
