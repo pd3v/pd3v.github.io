@@ -137,7 +137,7 @@ f = _ => {
   }
 }
 
-Sequencer.generator(CMinorScale, f).synth('SynthFM',{a:rand(0,0.2),d:0,r:rand(0,2)}).start(ac,80);
+Sequencer.generator(CMinorScale, f).synth('SynthFM',{a:rand(0,0.2),d:0,r:rand(0,2)}).start(ac,round(rand(60,140)));
 
 document.getElementById("code").innerHTML += '<span>'+composition+f+'</span>';
 
