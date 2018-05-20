@@ -101,9 +101,9 @@ class SynthFM extends Synth {
     this.carrier = ac.createOscillator();
     this.carrierGain = ac.createGain();
     this.modulator = ac.createOscillator();
-    this.modulator.frequency.setValueAtTime(500, 0);
+    this.modulator.frequency.setValueAtTime(rand(10,1500), 0);
     this.modulatorGain = ac.createGain();
-    this.modulatorGain.gain.setValueAtTime(50, 0);
+    this.modulatorGain.gain.setValueAtTime(rand(50, 150), 0);
 
     this.carrier.onended = _ => {
       this.disconnect();
