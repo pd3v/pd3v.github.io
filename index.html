@@ -71,10 +71,32 @@
     <div id="subtitle">sounding</div>
   </div>
   <div id="gen_algorithm">
-    <div id="code">gen::</div>
+    <div id="code">gen algorithm::</div>
   </div>
 </body>
 <script>
+const NUMBER_OF_ALGORITHMS = 3;
+
+var GenerativeAlgorithm = {
+  load: function(src, callback) {
+    var script = document.createElement('script'),loaded;
+    script.setAttribute('src', src);
+    if (callback) {
+      script.onreadystatechange = script.onload = function() {
+        if (!loaded) {
+          callback();
+        }
+        loaded = true;
+      };
+    }
+    document.head.appendChild(script);
+  }
+}
+
+GenerativeAlgorithm.load('genalgorithms/gen' + ((NUMBER_OF_ALGORITHMS-1)*Math.random().toFixed(0)+1) + '.js', function() {
+  document.getElementById("code").innerHTML += '<span>'+f+'</span>';
+});
+
 // Page layout
 var canvas = document.getElementById("colorCanvas");
 var ctx = canvas.getContext("2d");
@@ -92,7 +114,7 @@ var fps = 20;
 scope.fftSize = 2048;
 scope.getByteTimeDomainData(dataArray);
 
-const CMinorScale = {c:0, d:2, ef:3, f:5, g:7, af:8, bf:10};
+/*const CMinorScale = {c:0, d:2, ef:3, f:5, g:7, af:8, bf:10};
 const scaleLength = Object.values(CMinorScale).length;
 
 // function composition is using Markov Chains
@@ -137,9 +159,9 @@ f = _ => {
   }
 }
 
-Sequencer.generator(CMinorScale, f).synth('SynthFM',{a:rand(0,0.2),d:0,r:rand(0,2)}).start(ac,round(rand(60,140)));
+Sequencer.generator(CMinorScale, f).synth('SynthFM',{a:rand(0,0.2),d:0,r:rand(0,2)}).start(ac,round(rand(60,140)));*/
 
-document.getElementById("code").innerHTML += '<span>'+composition+f+'</span>';
+// document.getElementById("code").innerHTML += '<span>'+f+'</span>';
 
 drawWave();
 
