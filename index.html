@@ -7,6 +7,17 @@
     height: 100%;
     margin: 0px;
   }
+  a {
+    color: #777777;
+    text-decoration: none;
+  }
+  a:hover {
+    color: cyan;
+  }
+  a:visited {
+    font-style: normal;
+    text-decoration: none;
+  }
   #top_bar {
     margin: 0px;
   }
@@ -50,6 +61,14 @@
     line-height: 60px;
     float: left;
   }
+  #repo {
+    font-family: "menlo", sans-serif;
+    font-size: 15px;
+    font-style: italic;
+    color: #ffffff7a;
+    line-height: 630px;
+    float: left;
+  }
   canvas {
     position: absolute;
     z-index: -1;
@@ -70,6 +89,7 @@
     <div id="version">0.0.1</div>
     <div id="subtitle">sounding</div>
   </div>
+  <div id="repo"><a href="https://github.com/pd3v/fluX" target="_blank">go to repo</a></div>
   <div id="gen_algorithm">
     <div id="code">gen algorithm::</div>
   </div>
