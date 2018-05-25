@@ -1,6 +1,7 @@
 class Synth {
   constructor(adsr={a:0,d:0,s:0,r:0}) {
     this.adsrEnv = adsr;
+
   }
 
   get audioContext() {
@@ -14,6 +15,7 @@ class Synth {
 
   engine() {
     this.osc = this.ac.createOscillator();
+    this.osc.type = 'sine';
     this.oscGain = this.ac.createGain();
     this.osc.onended = _ => {
       this.disconnect();
