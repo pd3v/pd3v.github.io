@@ -1,3 +1,6 @@
+const CMinorScale = {c:0, d:2, ef:3, f:5, g:7, af:8, bf:10};
+const scaleLength = Object.values(CMinorScale).length;
+
 var oc = 2;
 let f = _ => {
   // oc starts with 2
