@@ -120,7 +120,9 @@ var GenerativeAlgorithm = {
   }
 }
 
-GenerativeAlgorithm.load('genalgorithms/gen' + ((NUMBER_OF_ALGORITHMS-1)*Math.random().toFixed(0)+1) + '.js', function() {
+let g = ((NUMBER_OF_ALGORITHMS-1)*Math.random()+1).toFixed(0);
+console.log(g);
+GenerativeAlgorithm.load('genalgorithms/gen' + ((NUMBER_OF_ALGORITHMS-1)*Math.random()+1).toFixed(0) + '.js', function() {
   document.getElementById("code").innerHTML += '<span>'+f+'</span>';
 });
 
