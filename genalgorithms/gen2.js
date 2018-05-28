@@ -8,7 +8,6 @@ var ascending = true;
 // with velocity changes for expressiveness
 let f = _ => {
     ascending = !ascending;
-  }
 
   if (ascending) {
     return {note:countTo(scaleLength-1), vel:countTo(scaleLength-1)>=2 && countTo(scaleLength-1)<=4? 100: 39, oct:4};
