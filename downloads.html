@@ -6,22 +6,31 @@
     width:  100%;
     height: 100%;
     margin: 0px;
+    background-color: #fbfbfb;
   }
   a {
-    /* color: #ffffff7a; */
-    /* opacity: 0.8; */
-    padding: 2px;
+    /* padding: 2px; */
     text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9em;
-    margin-left: 10px;
+    font-family: 'andale mono', 'menlo', 'Courier New', Courier, monospace;
+    font-size: 0.83em;
+    color:#4c4b4b;
+    padding: 2px;
   }
   a:hover {
-    color: black;
+    /* color:#333333; */
     padding: 2px;
+    background-color: #f6f3f3;
   }
   a:visited {
     text-decoration: none;
+  }
+  ul {
+    /* margin-left: 0px; */
+    /* padding-left: 20px; */
+    margin-top: 25px;
+  }
+  li {
+    list-style-type: none;
   }
   #top_bar {
     margin: 0px;
@@ -44,11 +53,13 @@
     font-size: 12px;
   }
   #title {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'andale mono', 'menlo', 'Courier New', Courier, monospace;
     color: black;
     float: left;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 20px;
+    margin-left: 30px;
+    font-size: 0.9em;
+    font-weight: 900;
   }
   #version {
     height: 40px;
@@ -78,10 +89,10 @@
     line-height: 62px;
     float: left;
   }
-  canvas {
+  /* canvas {
     position: absolute;
     z-index: -1;
-  }
+  } */
   </style>
   <title>pd3v sounding code</title>
   <meta charset="UTF-8">
@@ -103,6 +114,14 @@
     <li><a href="downloads/line_v0.7_mac_intel.zip">line_v0.7_mac_intel.zip</a></li><br>
     <li><a href="downloads/line_v0.6.2_mac_intel.zip">line_v0.6.2_mac_intel.zip</a></li>
     <li><a href="downloads/line_v0.6.2_linux.zip">line_v0.6.2_linux.zip</a></li>
+  </ul>  
+  
+  <div id="top_bar">
+    <div id="title">download <b>max externals</b></div>
+  </div>
+  <br>
+  <ul>
+    <li><a href="downloads/max_externals.zip">max_externals.zip</a></li><br>
   </ul>  
   <!-- <div id="repo"><a href="https://github.com/pd3v/fluX" target="_blank">go to repo</a></div>
   <div id="gen_algorithm">
