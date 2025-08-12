@@ -1,0 +1,45 @@
+body {
+  width:  90%;
+  height: 100%;
+  margin: 0px;
+  padding-left: 30px;
+  background-color: #fbfbfb;
+  font-family: "menlo", "helvetica", sans-serif;
+  font-size: 15px;
+}
+code {
+  color: #000000;
+  background-color: rgb(240, 240, 240);
+  font-size: 15px;
+  border-radius: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+/* h2 {
+  text-decoration: underline;
+} */
+warning{
+  background-color:yellow;
+  padding: 10px;
+  border-radius: 5px;
+}
+a {
+  text-decoration: none;
+  font-family: 'andale mono', 'menlo', 'Courier New', Courier, monospace;
+  font-size: 1.2em;
+  color:#4c4b4b;
+  padding: 2px;
+  border-radius: 5px;
+}
+a:hover {
+  /* color:#333333; */
+  padding: 2px;
+  background-color: #f6f3f3;
+}
+a:visited {
+  text-decoration: none;
+}
+.book {
+  margin:0px;
+  padding: 0;
+}

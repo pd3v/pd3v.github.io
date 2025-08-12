@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="line.css">
+</head>
+<body>
+<p><a href="#launch">Launch <em>line</em></a></p>
+<p><a href="#manual"><em>line</em> v0.8 Manual</a></p>
+<p><a href="#combined">All commands can be combined in one single line</a>
+<p><a href="#underscore">"_" underscore char after any command</a>
+<p><a href="#reference">Commands Reference</a>
+<hr />
+
+<a class="book" name="launch"></a>
+<h2>Launch <em>line</em></h2>
+<p>If your <em>line</em>'s folder in the Desktop</p>
+<ul>
+<li>
+<p>Open Terminal (MacOS) or similar</p>
+</li>
+<li>
+<p>Type
+    <code>cd ~/Desktop/line/build</code> {ENTER}</p>
+</li>
+<li>
+<p>Type <code>./line</code> {ENTER}</p>
+</li>
+</ul>
+<h5>&lt;&lt;&lt; <em>line</em> is now running &gt;&gt;&gt;</h5>
+<hr />
+<p><strong>Now run your favorite synth, sampler, DAW, or other MIDI receiver!</strong></p>
+
+<a class="book" name="manual"></a>
+<h2><em>line</em> v0.8 Manual</h2>
+<p>With <em>line</em> running, type:</p>
+<p><strong>Send a MIDI message:</strong></p>
+<p>4 1/4 midi notes</p>
+<p><code>45 46 47 48</code> or <code>a3 as3 b3 c4</code></p>
+<p>1/4 1/8 1/8 1/4 1/4 notes</p>
+<p><code>45 .34 35. 48 49</code> or <code>a3 .as2 b2. c4 cs4</code></p>
+<p>'-' for a rest note</p>
+<p><code>36 .37 38. 41 .- 46.</code> </p>
+<p>C Major chord + C Major arpeggio. All 1/4</p>
+<p><code>(c3 e3 g3) g5 e6 c2</code></p>
+<p>d note with 0.5 of amplitude</p>
+<p><code>d3~.5</code></p>
+<p>C Minor chord with 0.7 of amplitude</p>
+<p><code>(c4 eb4 g4)~.7</code></p>
+<p><em>Note: amplitude is 1.0, by default</em></p>
+<p><strong>Set a MIDI channel:</strong>  </p>
+<p>channel 2</p>
+<p><code>sch(2)</code></p>
+<p><strong>Set bpm:</strong>  </p>
+<p>120 bpm</p>
+<p><code>sbpm(120)</code></p>
+<p><strong>Set a range of values (MIDI range is default):</strong></p>
+<p>range [0 -&gt; 1000]</p>
+<p><code>range(0 1000)</code></p>
+<p>minimum is 100</p>
+<p><code>mi100</code></p>
+<p>maximum is 1000</p>
+<p><code>ma1000</code></p>
+<p><strong>Set overall relative amplitude:</strong></p>
+<p>50% of previous overall amplitude</p>
+<p><code>am(50)</code></p>
+<p><strong>Concatenate phrase n times:</strong></p>
+<p>concat phrase 4x </p>
+<p><code>mult(4)</code></p>
+<p><strong>Set phrase duration n times:</strong></p>
+<p>Increase phrase duration 8x </p>
+<p><code>slow(8)</code></p>
+<p><strong>Mute and unmute:</strong></p>
+<p><code>m</code> and <code>um</code></p>
+<p><strong>Reverse:</strong>  </p>
+<p><code>r</code></p>
+<p><strong>Scramble:</strong>  </p>
+<p>scrambles notes within each rhythmic part and rhythmic structure</p>
+<p><code>s</code></p>
+<p><strong>Extra scramble:</strong>  </p>
+<p>scrambles notes across the phrases and rhythmic structure</p>
+<p><code>x</code></p>
+<p><strong>Amplitude Scramble and Extra Scramble:</strong></p>
+<p><code>sa</code> and <code>xa</code></p>
+<p><strong>Save phrase to a queue:</strong></p>
+<p>place it on top of the queue; position 0</p>
+<p><code>sp</code></p>
+<p>replace phrase in position 3</p>
+<p><code>sp(3)</code></p>
+<p><strong>Load phrase:</strong>  </p>
+<p>load postion 0 phrase; it will play next</p>
+<p><code>lp(0)</code> <!--or <code>:0</code>--></p>
+<p><strong>List saved phrases</strong></p>
+<p><code>l</code></p>
+<p><strong>Save queued phrases to <em>.line</em> (= txt) file</strong></p>
+<p>Will assume prompt name as file name</p>
+<p><code>sf</code></p>
+<p>Save file with <em>mysynth.line</em> name</p>
+<p><code>sfmysynth</code></p>
+<p><em>Note: Will also save line instance parameters (prompt, channel, notes/cc, range of values)</em></p>
+<p><strong>Load <em>.line</em> file to line</strong></p>
+<p>Load sampler.line</p>
+<p><code>lfsampler</code></p>
+<p><em>Note: Will apply to line instance saved parameters</em></p>
+<p><strong>Switch between notes and cc modes:</strong>  </p>
+<p>notes mode</p>
+<p><code>n</code> </p>
+<p>cc mode on channel 2</p>
+<p><code>scc(2)</code></p>
+<!--**Set cc sync:**  
+
+In-sync or Out-sync
+
+`i` or `o`
+-->
+<p><strong>Relabel prompt:</strong> </p>
+<p>from default <strong>line&gt;</strong> to <strong>_my_synth&gt;</strong>, type:</p>
+<p><code>lb(my_synth)</code></p>
+<p><strong>Exit:</strong></p>
+<p><code>q</code> or <code>quit</code>  </p>
+<p><strong>Display commands standard menu/extended menu:</strong></p>
+<p><code>ls</code> or <code>le</code></p>
+<hr />
+
+<a class="book" name="combined"></a>
+<h2>All commands can be combined in one single line</h2>
+<p>Plays 4 different octaves of c, 4 of each, total 16 notes, all randomly positioned, once</p>
+<p><code>c4 c5 c6 c7 mult(4) s</code></p>
+<br>
+<a class="book" name="underscore"></a>
+<h2>"_" underscore char after any command</h2>
+<p>The same previous combo but randomly positioned every new cycle/bar, forever</p>
+<p><code>c4 c5 c6 c7 mult(4) s_</code></p>
+<p>The same previous combo but randomly positioned next 2 cycles/bars</p>
+<p><code>c4 c5 c6 c7 mult(4) s_2</code></p>
+<hr />
+
+<a class="book" name="reference"></a>
+<h2>Commands Reference</h2>
+<h3>with <em>0</em> arguments</h3>
+<p><code>q</code> - quit <em>line</em></p>
+<p><code>quit</code> - quit <em>line</em></p>
+<p><code>ls</code> - commands standard list</p>
+<p><code>le</code> - commands extended list</p>
+<p><code>play</code> - play mode</p>
+<p><code>n</code> - play mode</p>
+<p><code>print</code> - current phrase pretty print</p>
+<p><code>push</code> - push current phrase to memory</p>
+<p><code>sp</code> - push current phrase to memory</p>
+<p><code>pushed</code> - list all phrases in memory</p>
+<p><code>lbk</code> - list all phrases in memory</p>
+<p><code>l</code> - list all phrases in memory</p>
+<p><code>wch</code> - what channel</p>
+<p><code>wcc</code> - what CC</p>
+<p><code>wbpm</code> - what BPM</p>
+<p><code>m</code> - mute</p>
+<p><code>um</code> - unmute</p>
+<p><code>wslow</code> - what slow</p>
+<p><code>wrange</code> - what range</p>
+<p><code>save</code> - save .line file by prompt name</p>
+<p><code>sf</code> - save .line file by prompt name</p>
+<p><code>rgain</code> - random gains to all values in phrase</p>
+<p><code>ga</code> - random gains to all values in phrase</p>
+<p><code>xgain</code> - random current gains values</p>
+<p><code>xg</code> - random current gains values</p>
+<p>...</p>
+<p><warning>transcription work in progress<warning></p>
+</body>    
