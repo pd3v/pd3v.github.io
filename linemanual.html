@@ -4,16 +4,17 @@
     <link rel="stylesheet" href="line.css">
 </head>
 <body>
+<top-title><em>line</em></top-title><line-descr>tiny (not so, since v0.8) command-line midi sequencer and language for live coding music</line-descr>
 <p><a href="#launch">Launch <em>line</em></a></p>
 <p><a href="#manual"><em>line</em> v0.8 Manual</a></p>
-<p><a href="#combined">All commands can be combined in one single line</a>
-<p><a href="#underscore">"_" underscore char after any command</a>
+<p><a href="#combined">Every command can be combined in one single line</a>
+<p><a href="#underscore">"_" underscore char adjacent after any command</a>
 <p><a href="#reference">Commands Reference</a>
 <hr />
 
 <a class="book" name="launch"></a>
 <h2>Launch <em>line</em></h2>
-<p>If your <em>line</em>'s folder in the Desktop</p>
+<p>If <em>line</em>'s folder in your Desktop</p>
 <ul>
 <li>
 <p>Open Terminal (MacOS) or similar</p>
@@ -27,8 +28,8 @@
 </li>
 </ul>
 <h5>&lt;&lt;&lt; <em>line</em> is now running &gt;&gt;&gt;</h5>
-<hr />
 <p><strong>Now run your favorite synth, sampler, DAW, or other MIDI receiver!</strong></p>
+<hr />
 
 <a class="book" name="manual"></a>
 <h2><em>line</em> v0.8 Manual</h2>
@@ -122,12 +123,12 @@ In-sync or Out-sync
 <hr />
 
 <a class="book" name="combined"></a>
-<h2>All commands can be combined in one single line</h2>
+<h2>Every command can be combined in one single line</h2>
 <p>Plays 4 different octaves of c, 4 of each, total 16 notes, all randomly positioned, once</p>
 <p><code>c4 c5 c6 c7 mult(4) s</code></p>
 <br>
 <a class="book" name="underscore"></a>
-<h2>"_" underscore char after any command</h2>
+<h2>"_" underscore char adjacent after any command</h2>
 <p>The same previous combo but randomly positioned every new cycle/bar, forever</p>
 <p><code>c4 c5 c6 c7 mult(4) s_</code></p>
 <p>The same previous combo but randomly positioned next 2 cycles/bars</p>
@@ -137,31 +138,42 @@ In-sync or Out-sync
 <a class="book" name="reference"></a>
 <h2>Commands Reference</h2>
 <h3>with <em>0</em> arguments</h3>
-<p><code>q</code> - quit <em>line</em></p>
-<p><code>quit</code> - quit <em>line</em></p>
+<p><code>q</code> - quit <em>line</em><tag-new>replace</tag-new></p>
+<p><code>quit</code> - quit <em>line</em><tag-new>replce</tag-new></p>
 <p><code>ls</code> - commands standard list</p>
 <p><code>le</code> - commands extended list</p>
-<p><code>play</code> - play mode</p>
+<p><code>play</code> - play mode<tag-new>new</tag-new></p>
 <p><code>n</code> - play mode</p>
-<p><code>print</code> - current phrase pretty print</p>
-<p><code>push</code> - push current phrase to memory</p>
-<p><code>sp</code> - push current phrase to memory</p>
-<p><code>pushed</code> - list all phrases in memory</p>
-<p><code>lbk</code> - list all phrases in memory</p>
-<p><code>l</code> - list all phrases in memory</p>
-<p><code>wch</code> - what channel</p>
-<p><code>wcc</code> - what CC</p>
-<p><code>wbpm</code> - what BPM</p>
+<p><code>print</code> - current phrase pretty print<tag-new>new</tag-new></p>
+<p><code>push</code> - push current phrase to stack<tag-new>new</tag-new></p>
+<p><code>sp</code> - push current phrase to stack</p>
+<p><code>pushed</code> - list all phrases in stack<tag-new>new</tag-new></p>
+<p><code>lbk</code> - list all phrases in stack<tag-new>new</tag-new></p>
+<p><code>l</code> - list all phrases in stack</p>
+<p><code>wch</code> - what channel<tag-new>replace</tag-new></p>
+<p><code>wcc</code> - what CC<tag-new>replace</tag-new></p>
+<p><code>wbpm</code> - what BPM<tag-new>replace</tag-new></p>
 <p><code>m</code> - mute</p>
 <p><code>um</code> - unmute</p>
-<p><code>wslow</code> - what slow</p>
-<p><code>wrange</code> - what range</p>
-<p><code>save</code> - save .line file by prompt name</p>
+<p><code>wslow</code> - what slow<tag-new>replace</tag-new></p>
+<p><code>wrange</code> - what range<tag-new>replace</tag-new></p>
+<p><code>save</code> - save .line file by prompt name<tag-new>new</tag-new></p>
 <p><code>sf</code> - save .line file by prompt name</p>
-<p><code>rgain</code> - random gains to all values in phrase</p>
+<p><code>rgain</code> - generate random gains to all values in phrase<tag-new>new</tag-new></p>
 <p><code>ga</code> - random gains to all values in phrase</p>
-<p><code>xgain</code> - random current gains values</p>
-<p><code>xg</code> - random current gains values</p>
+<p><code>xgain</code> - random current gains values<tag-new>new</tag-new></p>
+<p><code>xg</code> - random current gains values<tag-new>new</tag-new></p>
+<p><code>xs</code> - random current phrase's rhythmic structures</p>
+<p><code>x</code> -  random current values across the phrases and rhythmic structure</p>
+<p><code>rev</code> -  reverse current values' order<tag-new>new</tag-new></p>
+<p><code>r</code> -  reverse current values' order
+<p><code>scramble</code> - random reordering current values within each rhythmic part and rhythmic structure<tag-new>new</tag-new></p>
+<p><code>s</code> - random reordering current values within each rhythmic part and rhythmic structure
+<p><code>sa</code> - random reordering current gains within each rhythmic part and rhythmic structure   
+<p><code>rvalue</code> - generate random values between 0 and 127 for every placeholder in phrase<tag-new>new</tag-new></p> 
+<p><code>roct</code> - replace every value/note with with a new one in a random different (or not) octave<tag-new>new</tag-new></p>
+
+<h3>with <em>1</em> argument</h3>
 <p>...</p>
 <p><warning>transcription work in progress<warning></p>
 </body>    
