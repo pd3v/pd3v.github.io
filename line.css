@@ -4,7 +4,7 @@ body {
   margin: 0px;
   padding-left: 30px;
   background-color: #fbfbfb;
-  font-family: "menlo", "helvetica", sans-serif;
+  font-family: "menlo", 'andale mono', "helvetica", sans-serif;
   font-size: 15px;
 }
 code {
@@ -25,7 +25,7 @@ warning{
 }
 a {
   text-decoration: none;
-  font-family: 'andale mono', 'menlo', 'Courier New', Courier, monospace;
+  /* font-family:  'menlo', 'andale mono', "helvetica", sans-serif; */
   font-size: 1.2em;
   color:#4c4b4b;
   padding: 2px;
@@ -47,8 +47,6 @@ top-title {
   display: inline;
   font-size: 1.8em;
   font-weight: bold;
-  margin-top: 30px;
-  padding-top: 50px;
   margin-right: 20px;
 }
 line-descr {
