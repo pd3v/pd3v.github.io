@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="line.css">
 </head>
 <body>
+<br>
 <top-title><em>line</em></top-title><line-descr>tiny (not so, since v0.8) command-line midi sequencer and language for live coding music</line-descr>
 <p><a href="#launch">Launch <em>line</em></a></p>
 <p><a href="#manual"><em>line</em> v0.8 Manual</a></p>
@@ -138,40 +139,54 @@ In-sync or Out-sync
 <a class="book" name="reference"></a>
 <h2>Commands Reference</h2>
 <h3>with <em>0</em> arguments</h3>
+<p><code>l</code> - list all phrases in stack</p>
+<p><code>lbk</code> - list all phrases in stack<tag-new>new</tag-new></p>
+
+<p><code>le</code> - commands extended list</p>
+<p><code>ls</code> - commands standard list</p>
+
+<p><code>n</code> - play mode</p>
+<p><code>play</code> - play mode<tag-new>new</tag-new></p>
+
 <p><code>q</code> - quit <em>line</em><tag-new>replace</tag-new></p>
 <p><code>quit</code> - quit <em>line</em><tag-new>replce</tag-new></p>
-<p><code>ls</code> - commands standard list</p>
-<p><code>le</code> - commands extended list</p>
-<p><code>play</code> - play mode<tag-new>new</tag-new></p>
-<p><code>n</code> - play mode</p>
+
 <p><code>print</code> - current phrase pretty print<tag-new>new</tag-new></p>
+
 <p><code>push</code> - push current phrase to stack<tag-new>new</tag-new></p>
-<p><code>sp</code> - push current phrase to stack</p>
 <p><code>pushed</code> - list all phrases in stack<tag-new>new</tag-new></p>
-<p><code>lbk</code> - list all phrases in stack<tag-new>new</tag-new></p>
-<p><code>l</code> - list all phrases in stack</p>
-<p><code>wch</code> - what channel<tag-new>replace</tag-new></p>
-<p><code>wcc</code> - what CC<tag-new>replace</tag-new></p>
-<p><code>wbpm</code> - what BPM<tag-new>replace</tag-new></p>
+
 <p><code>m</code> - mute</p>
 <p><code>um</code> - unmute</p>
-<p><code>wslow</code> - what slow<tag-new>replace</tag-new></p>
-<p><code>wrange</code> - what range<tag-new>replace</tag-new></p>
+
+<p><code>ga</code> - random gains to all values in phrase</p>
+
+<p><code>r</code> -  reverse current values' order
+<p><code>rev</code> -  reverse current values' order<tag-new>new</tag-new></p>
+
+<p><code>rgain</code> - generate random gains to all values in phrase<tag-new>new</tag-new></p>
+<p><code>roct</code> - replace every value/note with with a new one in a random different (or not) octave<tag-new>new</tag-new></p>
+<p><code>rvalue</code> - generate random values between 0 and 127 for every placeholder in phrase<tag-new>new</tag-new></p> 
+
+<p><code>s</code> - random reordering current values within each rhythmic part and rhythmic structure
+<p><code>sa</code> - random reordering current gains within each rhythmic part and rhythmic structure
+<p><code>scramble</code> - random reordering current values within each rhythmic part and rhythmic structure<tag-new>new</tag-new></p>
+
+
 <p><code>save</code> - save .line file by prompt name<tag-new>new</tag-new></p>
 <p><code>sf</code> - save .line file by prompt name</p>
-<p><code>rgain</code> - generate random gains to all values in phrase<tag-new>new</tag-new></p>
-<p><code>ga</code> - random gains to all values in phrase</p>
-<p><code>xgain</code> - random current gains values<tag-new>new</tag-new></p>
-<p><code>xg</code> - random current gains values<tag-new>new</tag-new></p>
-<p><code>xs</code> - random current phrase's rhythmic structures</p>
+<p><code>sp</code> - push current phrase to stack</p>
+
+<p><code>wbpm</code> - what BPM<tag-new>replace</tag-new></p>
+<p><code>wcc</code> - what CC<tag-new>replace</tag-new></p>
+<p><code>wch</code> - what channel<tag-new>replace</tag-new></p>
+<p><code>wrange</code> - what range<tag-new>replace</tag-new></p>
+<p><code>wslow</code> - what slow<tag-new>replace</tag-new></p>
+
 <p><code>x</code> -  random current values across the phrases and rhythmic structure</p>
-<p><code>rev</code> -  reverse current values' order<tag-new>new</tag-new></p>
-<p><code>r</code> -  reverse current values' order
-<p><code>scramble</code> - random reordering current values within each rhythmic part and rhythmic structure<tag-new>new</tag-new></p>
-<p><code>s</code> - random reordering current values within each rhythmic part and rhythmic structure
-<p><code>sa</code> - random reordering current gains within each rhythmic part and rhythmic structure   
-<p><code>rvalue</code> - generate random values between 0 and 127 for every placeholder in phrase<tag-new>new</tag-new></p> 
-<p><code>roct</code> - replace every value/note with with a new one in a random different (or not) octave<tag-new>new</tag-new></p>
+<p><code>xg</code> - random current gains values<tag-new>new</tag-new></p>
+<p><code>xgain</code> - random current gains values<tag-new>new</tag-new></p>
+<p><code>xs</code> - random current phrase's rhythmic structures</p>
 
 <h3>with <em>1</em> argument</h3>
 <p>...</p>
