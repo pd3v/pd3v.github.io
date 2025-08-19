@@ -55,8 +55,8 @@ line-descr {
 }
 tag-new {
   display: inline;
-  color: white;
-  background-color: rgb(194, 223, 194);
+  color: rgb(75, 75, 75);
+  background-color: rgb(255, 253, 134);
   border-radius: 5px;
   font-size: 10px;
   padding: 3px;
