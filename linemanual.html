@@ -108,12 +108,7 @@
 <p><code>n</code> </p>
 <p>cc mode on channel 2</p>
 <p><code>scc(2)</code></p>
-<!--**Set cc sync:**  
 
-In-sync or Out-sync
-
-`i` or `o`
--->
 <p><strong>Relabel prompt:</strong> </p>
 <p>from default <strong>line&gt;</strong> to <strong>_my_synth&gt;</strong>, type:</p>
 <p><code>lb(my_synth)</code></p>
@@ -149,7 +144,7 @@ In-sync or Out-sync
 <p><code>play</code> - play mode<tag-new>new</tag-new></p>
 
 <p><code>q</code> - quit <em>line</em><tag-new>replace</tag-new></p>
-<p><code>quit</code> - quit <em>line</em><tag-new>replce</tag-new></p>
+<p><code>quit</code> - quit <em>line</em><tag-new>replace</tag-new></p>
 
 <p><code>print</code> - current phrase pretty print<tag-new>new</tag-new></p>
 
@@ -172,7 +167,6 @@ In-sync or Out-sync
 <p><code>sa</code> - random reordering current gains within each rhythmic part and rhythmic structure
 <p><code>scramble</code> - random reordering current values within each rhythmic part and rhythmic structure<tag-new>new</tag-new></p>
 
-
 <p><code>save</code> - save .line file by prompt name<tag-new>new</tag-new></p>
 <p><code>sf</code> - save .line file by prompt name</p>
 <p><code>sp</code> - push current phrase to stack</p>
@@ -189,6 +183,27 @@ In-sync or Out-sync
 <p><code>xs</code> - random current phrase's rhythmic structures</p>
 
 <h3>with <em>1</em> argument</h3>
+
+
+<p><code>am(n)</code> - same as <code>relamp</code></p>
+<p><code>relamp(n)</code> - increases every amp in phrase by n%<tag-new>replace</tag-new></p>
+ 
+ <p><code>raise(n)</code> - adds n to all values in current phrase in range</tag-new></p>
+ <p><code>rotl(n)</code> - rotates all in values left by n<tag-new>new</tag-new></p>
+ <p><code>rotr(n)</code> - rotates all in values right by n<tag-new>new</tag-new></p>
+ <p><code>rl(n)</code> - same as <code>rotl</code></p>
+ <p><code>rr(n)</code> - same as <code>rotr</code></p>
+ 
+ <p><code>sgain(n)</code> - sets all values to gain to n in 0.0 - 1.0 range<tag-new>replace</tag-new></p>
+ 
+ <p><code>mult(n)</code> - concatenates current phrase n times<tag-new>replace</tag-new></p>
+ <p><code>prog(n)</code> - creates sequence of values where next is current + n in range<tag-new>new</tag-new></p>
+ <p><code>seq(n)</code> - creates a sequence of n (64, 127) values</tag-new></p>
+ <p><code>slice(n)</code> - creates sequence of n values in set range<tag-new>new</tag-new></p>
+ 
+ <p><code>soct(n)</code> - set octave n to every value<tag-new>new</tag-new></p>
+
+
 <p>...</p>
-<p><warning>transcription work in progress<warning></p>
+<p><warning>commands transcription work in progress<warning></p>
 </body>    
