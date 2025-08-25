@@ -11,6 +11,7 @@
 <p><a href="#combined">Every command can be combined in one single line</a>
 <p><a href="#underscore">"_" underscore char adjacent after any command</a>
 <p><a href="#reference">Commands Reference</a>
+<p><a href="#table_args">Commands by number of arguments</a>
 <hr />
 
 <a class="book" name="launch"></a>
@@ -186,28 +187,181 @@
 <p><code>am(n)</code> - same as <code>relamp</code></p>
 <p><code>relamp(n)</code> - increases every amplitude in phrase by n%<tag-new>replace</tag-new></p>
  
- <p><code>raise(n)</code> - adds n to all values in current phrase within range</tag-new></p>
- <p><code>rotl(n)</code> - rotates all values left by n<tag-new>new</tag-new></p>
- <p><code>rotr(n)</code> - rotates all values right by n<tag-new>new</tag-new></p>
- <p><code>rl(n)</code> - same as <code>rotl</code></p>
- <p><code>rr(n)</code> - same as <code>rotr</code></p>
- 
- <p><code>sgain(n)</code> - sets all values to gain n. 0.0 - 1.0 range<tag-new>replace</tag-new></p>
- 
- <p><code>mult(n)</code> - concatenates current phrase n times<tag-new>replace</tag-new></p>
- <p><code>prog(n)</code> - creates sequence of values where next value is (current + n)<tag-new>new</tag-new></p>
- <p><code>seq(n)</code> - creates a sequence of n (value:64, amp:127) pairs</tag-new></p>
- <p><code>slice(n)</code> - creates sequence of n values<tag-new>new</tag-new></p>
- 
- <p><code>soct(n)</code> - set octave n to every value<tag-new>new</tag-new></p>
+<p><code>raise(n)</code> - adds n to all values in current phrase within range</tag-new></p>
+<p><code>rotl(n)</code> - rotates all values left by n<tag-new>new</tag-new></p>
+<p><code>rotr(n)</code> - rotates all values right by n<tag-new>new</tag-new></p>
+<p><code>rl(n)</code> - same as <code>rotl</code></p>
+<p><code>rr(n)</code> - same as <code>rotr</code></p>
 
- <p><code>label(s)</code> rename prompt with s name<tag-new>new</tag-new></p>
- <p><code>lb(s)</code> - same as <code>label</code></p>
- <p><code>lf(s)</code> - open file with s name</p>
- <p><code>open(s)</code> - same as <code>lf</code><tag-new>new</tag-new></p>
- <p><code>save(s)</code> - save file with s name<tag-new>new</tag-new></p>
- <p><code>sf(s)</code> - same as <code>save</code></p>
+<p><code>sgain(n)</code> - sets all values to gain n. 0.0 - 1.0 range<tag-new>replace</tag-new></p>
 
-<p>...</p>
-<p><warning>commands transcription work in progress<warning></p>
+<p><code>mult(n)</code> - concatenates current phrase n times<tag-new>replace</tag-new></p>
+<p><code>prog(n)</code> - creates sequence of values where next value is (current + n)<tag-new>new</tag-new></p>
+<p><code>seq(n)</code> - creates a sequence of n (value:64, amp:127) pairs</tag-new></p>
+<p><code>slice(n)</code> - creates sequence of n values<tag-new>new</tag-new></p>
+
+<p><code>soct(n)</code> - set octave n to every value<tag-new>new</tag-new></p>
+
+<p><code>label(s)</code> rename prompt with s name<tag-new>new</tag-new></p>
+<p><code>lb(s)</code> - same as <code>label</code></p>
+<p><code>lf(s)</code> - open file with s name</p>
+<p><code>open(s)</code> - same as <code>lf</code><tag-new>new</tag-new></p>
+<p><code>save(s)</code> - save file with s name<tag-new>new</tag-new></p>
+<p><code>sf(s)</code> - same as <code>save</code></p>
+
+<h3>with <em>2</em> arguments</h3>
+<p><code>pick(v1 v2)</code> - pick randomly v1 or v2<tag-new>new</tag-new></p>
+<p><code>range(min max)</code> - change the default MIDI range to [min-max]<tag-new>replace</tag-new></p>
+<p><code>roct(min max)</code> - random octave values between min and max<tag-new>new</tag-new></p>
+<p><code>rgain(min max)</code> - random gain values between min and max. Decimal gain values between 0.0 and 1.0<tag-new>new</tag-new></p>
+<p><code>rvalue(min max)</code> - random MIDI values between min and max<tag-new>new</tag-new></p>
+
+<h3>with <em>3</em> arguments</h3>
+<p><code>pick(v1 v2 v3)</code> - pick randomly v1, v2 or v3<tag-new>new</tag-new></p>
+<p><code>prog(min max incr)</code> - creates sequence of values where next value is (current + n) within [min - max] scope<tag-new>new</tag-new></p>
+<p><code>slice(min max n)</code> - creates sequence of n values within [min - max] scope<tag-new>new</tag-new></p>
+
+<h3>with <em>7</em> arguments</h3>
+<p><code>pick(v1 v2 v3 v4 v5 v6 v7)</code> - pick randomly from v1 to v7<tag-new>new</tag-new></p>
+
+<!-- <p>...</p>
+<p><warning>commands' table by number of arguments is work in progress<warning></p> -->
+
+<br>
+<a class="book" name="table_args"></a>
+<table>
+    <tr id="table-title"><td colspan="20" style="font-weight: 900;">Commands by number of arguments</td></tr>
+    <tr>
+        <td rowspan="2" style="font-weight: 600;">0 arg</td>
+        <td>l</td>
+        <td>lbk</td>
+        <td>le</td>
+        <td>ls</td>
+        <td>n</td>
+        <td>play</td>
+        <td>q</td>
+        <td>quit</td>
+        <td>print</td>
+        <td>push</td>
+        <td>pushed</td>
+        <td>m</td>
+        <td>um</td>
+        <td>ga</td>
+        <td>r</td>
+        <td>rev</td>
+        <td>rgain</td>
+        <td>roct</td>
+        <td>rvalue</td>
+    </tr>
+    <tr>
+        <td>s</td>
+        <td>sa</td>
+        <td>scramble</td>
+        <td>save</td>
+        <td>sf</td>
+        <td>sp</td>
+        <td>wbpm</td>
+        <td>wcc</td>
+        <td>wch</td>
+        <td>wrange</td>
+        <td>wslow</td>
+        <td>x</td>
+        <td>xg</td>
+        <td>xgain</td>
+        <td>xs</td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+    </tr>
+    <tr>
+        <td style="font-weight: 600;">1 arg</td>
+        <td>am</td>
+        <td>relampk</td>
+        <td>raise</td>
+        <td>rotl</td>
+        <td>rotr</td>
+        <td>rl</td>
+        <td>rr</td>
+        <td>sgain</td>
+        <td>mult</td>
+        <td>prog</td>
+        <td>seq</td>
+        <td>slice</td>
+        <td>soct</td>
+        <td>label</td>
+        <td>lb</td>
+        <td>lf</td>
+        <td>open</td>
+        <td>save</td>
+        <td>sf</td>
+    </tr>
+    <tr>
+        <td style="font-weight: 600;">2 args</td>
+        <td>pick</td>
+        <td>range</td>
+        <td>roct</td>
+        <td>rgain</td>
+        <td>rvalue</td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+    </tr>
+    <tr>
+        <td style="font-weight: 600;">3 args</td>
+        <td>pick</td>
+        <td>prog</td>
+        <td>slice</td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+    </tr>
+    <tr>
+        <td style="font-weight: 600;">7 args</td>
+        <td>pick</td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+    </tr>
+</table>
+<br><br>
 </body>    
