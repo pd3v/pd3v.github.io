@@ -7,6 +7,7 @@
     height: 100%;
     margin: 0px;
     background-color: #fbfbfb;
+    font-family: 'andale mono', 'menlo', 'Courier New', Courier, monospace;
   }
   a {
     /* padding: 2px; */
@@ -89,10 +90,18 @@
     line-height: 62px;
     float: left;
   }
-  /* canvas {
+  #changes_log {
     position: absolute;
-    z-index: -1;
-  } */
+    top: 20px;
+    right: 180px;
+    width: 455px;
+    height: 200px;
+    padding: 5px;
+    border:1px solid rgb(206, 206, 206);
+    border-width: 1px 0px 0px 0px;
+    font-size: 0.83em;
+  }
+
   </style>
   <title>pd3v sounding code</title>
   <meta charset="UTF-8">
@@ -123,7 +132,14 @@
   <br>
   <ul>
     <li><a href="downloads/max_externals_mac_intel.zip">max_externals_mac_intel.zip</a></li><br>
-  </ul>  
+  </ul>
+  
+  <div id="changes_log">
+    <div><strong>Log</strong></div>
+    <table width="100%">
+      <tr><td width="20%" align="center">25-08-25.</td><td><em>line</em>'s v0.8 manual is complete.<a href="linemanual.html" target="_blank" style="font-size: 1em;">Go to manual.</a></td></tr>
+    </table>
+  </div>  
   <!-- <div id="repo"><a href="https://github.com/pd3v/fluX" target="_blank">go to repo</a></div>
   <div id="gen_algorithm">
     <div id="code">gen algorithm::</div>
