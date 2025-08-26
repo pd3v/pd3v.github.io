@@ -36,6 +36,7 @@
 <a class="book" name="manual"></a>
 <h2><em>line</em> v0.8 Manual</h2>
 <p>With <em>line</em> running, type:</p>
+
 <p><strong>Send a MIDI message:</strong></p>
 <p>4 1/4 midi notes</p>
 <p><code>45 46 47 48</code> or <code>a3 as3 b3 c4</code></p>
@@ -50,7 +51,28 @@
 <p>C Minor chord with 0.7 of amplitude</p>
 <p><code>(c4 eb4 g4)~.7</code></p>
 <p><em>Note: amplitude is 1.0, by default</em></p>
-<p><strong>Set a MIDI channel:</strong>  </p>
+
+<p><strong>More on chords:</strong></p>
+<p>As shown previously, to write chords round brackets <strong>()</strong> are mandatory.</p>
+<p>For major, minor, half-dimished, diminished chords, add 7th and 9th, <em>line</em> has chord cipher shortcuts.</p>
+
+<p>D Minor minor 7th chord</p>
+<code>(dminm7)</code>
+
+<p>B Half-Diminished</p>
+<code>(bhalfdim)</code>
+
+<p>B Dim</p>
+<code>(bdim)</code>
+
+<p>G Dominant</p>
+<code>(gmajm7)</code>
+<code>(g4majm7)</code>
+
+<p>C# Major add 9</p>
+<code>(cs2majM9)</code>
+
+<p><strong>Set a MIDI channel:</strong></p>
 <p>channel 2</p>
 <p><code>sch(2)</code></p>
 <p><strong>Set bpm:</strong>  </p>
@@ -227,12 +249,14 @@
 <!-- <p>...</p>
 <p><warning>commands' table by number of arguments is work in progress<warning></p> -->
 
+<hr />
 <br>
+
 <a class="book" name="table_args"></a>
 <table>
     <tr id="table-title"><td colspan="20" style="font-weight: 900;">Commands by number of arguments</td></tr>
     <tr>
-        <td rowspan="2" style="font-weight: 600;">0 arg</td>
+        <td rowspan="2" style="font-weight: 600;">0 args</td>
         <td>l</td>
         <td>lbk</td>
         <td>le</td>
