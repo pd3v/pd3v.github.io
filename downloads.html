@@ -10,7 +10,6 @@
     font-family: 'andale mono', 'menlo', 'Courier New', Courier, monospace;
   }
   a {
-    /* padding: 2px; */
     text-decoration: none;
     font-family: 'andale mono', 'menlo', 'Courier New', Courier, monospace;
     font-size: 0.83em;
@@ -18,7 +17,6 @@
     padding: 2px;
   }
   a:hover {
-    /* color:#333333; */
     padding: 2px;
     background-color: #f6f3f3;
   }
@@ -26,8 +24,6 @@
     text-decoration: none;
   }
   ul {
-    /* margin-left: 0px; */
-    /* padding-left: 20px; */
     margin-top: 25px;
   }
   li {
@@ -97,8 +93,8 @@
     width: 455px;
     height: 200px;
     padding: 5px;
-    border:1px solid rgb(206, 206, 206);
-    border-width: 1px 0px 0px 0px;
+    /* border:1px solid rgb(206, 206, 206);
+    border-width: 1px 0px 0px 0px; */
     font-size: 0.83em;
   }
 
@@ -107,16 +103,8 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <!-- <script type="text/javascript" src="midiout.js"></script>
-  <script type="text/javascript" src="synth.js"></script>
-  <script type="text/javascript" src="generator.js"></script>
-  <script type="text/javascript" src="sequencer.js"></script>
-  <script type="text/javascript" src="helpers.js"></script>
-  <canvas id="colorCanvas"></canvas> -->
   <div id="top_bar">
     <div id="title">download <b>line</b></div>
-    <!-- <div id="version">0.1</div> -->
-    <!-- <div id="subtitle">sounding</div> -->
   </div>
   <br>
   <ul>
@@ -135,90 +123,14 @@
   </ul>
   
   <div id="changes_log">
-    <div><strong>Log</strong></div>
+    <div><strong>Latest</strong></div>
+    <hr>
     <table width="100%">
+      <tr><td width="20%" align="center">28-08-25.</td><td>Update manual to <em>line</em>'s v0.8.1</td></tr>
+      <tr><td width="20%" align="center">27-08-25.</td><td>scales and modes commands</td></tr>
+      <tr><td width="20%" align="center">27-08-25.</td><td>chord cypher shortcuts</td></tr>
       <tr><td width="20%" align="center">25-08-25.</td><td><em>line</em>'s v0.8 manual is complete.<a href="linemanual.html" target="_blank" style="font-size: 1em;">Go to manual.</a></td></tr>
     </table>
   </div>  
-  <!-- <div id="repo"><a href="https://github.com/pd3v/fluX" target="_blank">go to repo</a></div>
-  <div id="gen_algorithm">
-    <div id="code">gen algorithm::</div>
-  </div> -->
 </body>
-<!-- <script>
-const NUMBER_OF_ALGORITHMS = 6;
-
-var GenerativeAlgorithm = {
-  load: function(src, callback) {
-    var script = document.createElement('script'),loaded;
-    script.setAttribute('src', src);
-    if (callback) {
-      script.onreadystatechange = script.onload = function() {
-        if (!loaded) {
-          callback();
-        }
-        loaded = true;
-      };
-    }
-    document.head.appendChild(script);
-  }
-}
-
-GenerativeAlgorithm.load('genalgorithms/gen' + ((NUMBER_OF_ALGORITHMS-1)*Math.random()+1).toFixed(0) + '.js', function() {
-  document.getElementById("code").innerHTML += '<span>'+f+'</span>';
-});
-
-// Page layout
-var canvas = document.getElementById("colorCanvas");
-var ctx = canvas.getContext("2d");
-ctx.canvas.width  = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
-
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var ac = new AudioContext();
-
-var scope = ac.createAnalyser();
-var bufferLength = scope.frequencyBinCount;
-var dataArray = new Uint8Array(bufferLength);
-var fps = 20;
-
-scope.fftSize = 2048;
-scope.getByteTimeDomainData(dataArray);
-
-drawWave();
-
-function drawWave() {
-  var sliceWidth = ctx.canvas.width * 1.1 / bufferLength;
-  var x = 0;
-
-  scope.getByteTimeDomainData(dataArray);
-
-  ctx.lineWidth = 0.5;
-  ctx.strokeStyle = '#999999';
-  ctx.stroke();
-
-  setTimeout(function() {
-       requestAnimationFrame(drawWave);
-
-       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-       ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-       ctx.beginPath();
-
-       for(var i = 0; i < bufferLength; i++) {
-         var v = dataArray[i] / 128.0;
-         var y = v * ctx.canvas.height/2;
-
-         if(i === 0) {
-           ctx.moveTo(x, y);
-         } else {
-           ctx.lineTo(x, y);
-         }
-         x += sliceWidth;
-       }
-   }, 1000 / fps);
-
-  ctx.lineTo(ctx.canvas.width, ctx.canvas.height);
-  ctx.stroke();
-};
-</script> -->
 </html>
