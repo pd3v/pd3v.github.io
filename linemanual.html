@@ -52,8 +52,8 @@
 <p><code>(c4 eb4 g4)~.7</code></p>
 <p><em>Note: amplitude is 1.0, by default</em></p>
 
-<p><strong>More on chords:</strong></p>
-<p>For major, minor, half-dimished, diminished chords, add 7th and 9th, <em>line</em> has chord cipher shortcuts.<tag-new>v0.8.1</tag-new></p>
+<p><strong>More on chords:</strong><tag-new>v0.8.1</tag-new></p>
+<p>For major, minor, half-dimished, diminished chords, add 7th and 9th, <em>line</em> has chord cipher shortcuts.</p>
 
 <p>D Minor minor 7th chord</p>
 <code>(dminm7)</code>
@@ -72,11 +72,16 @@
 <code>(cs2majM9)</code>
 
 <p><strong>Create a C major phrase with 8 notes</strong><tag-new>v0.8.1</tag-new></p>
-seq(8) major <comment>// resulting phrase: c d e f g a b MIDI equivalent: 0 2 4 5 7 9 11 0</comment>
+<p><code>seq(8) major</code> <comment>// resulting phrase: c d e f g a b MIDI equivalent: 0 2 4 5 7 9 11 0</comment></p>
 
 <p><strong>Create a D scale phrase with 8 notes</strong><tag-new>v0.8.1</tag-new></p>
-seq(8) major raise(2) soct(4) <comment>// resulting phrase: d4 e4 f#4 g4 a4 b4 c#4 d4 MIDI equivalent: 50 52 54 55 57 59 61 50 </comment>
+<p><code>seq(8) major raise(2) soct(4)</code> <comment>// resulting phrase: d4 e4 f#4 g4 a4 b4 c#4 d4 MIDI equivalent: 50 52 54 55 57 59 61 50 </comment></p>
 
+<p><strong>Create a sequence of 16 notes, 2 octaves of C Major scale</strong><tag-new>v0.8.1</tag-new></p>
+<p><code>seq(16) major(c4)</code></p>
+<p><code>seq(16) major soct(4)</code> <comment>// same as above</comment></p>
+<p><strong>Create a 4 notes chord with the first 4 notes of D locrian scale</strong><tag-new>v0.8.1</tag-new></p>
+<p><code>(_ _ _ _) locrian(d4)</code></p>
 
 <p><strong>Set a MIDI channel:</strong></p>
 <p>channel 2</p>
@@ -341,7 +346,7 @@ seq(8) major raise(2) soct(4) <comment>// resulting phrase: d4 e4 f#4 g4 a4 b4 c
         <td class="td-inact"></td>
     </tr>
     <tr>
-        <td style="font-weight: 600;">1 arg</td>
+        <td rowspan="2" style="font-weight: 600;">1 arg</td>
         <td>am</td>
         <td>relampk</td>
         <td>raise</td>
@@ -361,6 +366,27 @@ seq(8) major raise(2) soct(4) <comment>// resulting phrase: d4 e4 f#4 g4 a4 b4 c
         <td>open</td>
         <td>save</td>
         <td>sf</td>
+    </tr>
+    <tr>
+        <td>schromatic</td>
+        <td>whole</td>
+        <td>major</td>
+        <td>minor</td>
+        <td>harmonicminor</td>
+        <td>ionian</td>
+        <td>mdorian</td>
+        <td>phrygian</td>
+        <td>lydian</td>
+        <td>mixolydian</td>
+        <td>maeolian</td>
+        <td>locrian</td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
+        <td class="td-inact"></td>
     </tr>
     <tr>
         <td style="font-weight: 600;">2 args</td>
