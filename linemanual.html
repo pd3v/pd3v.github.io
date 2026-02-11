@@ -7,7 +7,7 @@
 <br>
 <top-title><em>line</em></top-title><line-descr>tiny (not so, since v0.8) command-line midi sequencer and language for live coding music</line-descr>
 <p><a href="#launch">Launch <em>line</em></a></p>
-<p><a href="#manual"><em>line</em> v0.8.1 Manual</a></p>
+<p><a href="#manual"><em>line</em> v0.8.2 Manual</a><tag-new>11-02-2026 update</tag-new></p>
 <p><a href="#combined">Every command can be combined in one single line</a>
 <p><a href="#underscore">"_" underscore char adjacent after any command</a>
 <p><a href="#reference">Commands Reference</a>
@@ -34,7 +34,7 @@
 <hr />
 
 <a class="book" name="manual"></a>
-<h2><em>line</em> v0.8 Manual</h2>
+<h2><em>line</em> v0.8.2 Manual</h2>
 <p>With <em>line</em> running, type:</p>
 
 <p><strong>Send a MIDI message:</strong></p>
@@ -51,7 +51,10 @@
 <p>C Minor chord with 0.7 of amplitude</p>
 <p><code>(c4 eb4 g4)~.7</code></p>
 <p><em>Note: amplitude is 1.0, by default</em></p>
-
+<br>
+<p><strong>"#" as prepend for a comment line</strong><tag-new>v0.8.2</tag-new></p>
+<p><code># this is a comment line in line, so pressing [ENTER] after is innocuous, nothing will be changed since last phrase + commands entered</code></p>
+<br>
 <p><strong>More on chords:</strong><tag-new>v0.8.1</tag-new></p>
 <p>For major, minor, half-dimished, diminished chords, add 7th and 9th, <em>line</em> has chord cipher shortcuts.</p>
 
@@ -137,7 +140,14 @@
 <p>Load sampler.line</p>
 <p><code>lf(sampler)</code></p>
 <p><em>Note: Will apply to line instance saved parameters</em></p>
-<p><strong>Switch between notes and cc modes:</strong>  </p>
+<br>
+<p><strong>To open a gig</strong> (a line <strong>gig</strong> is a folder where one or more .line files are stored)<tag-new>v0.8.2</tag-new></p>
+<p><code>ogig(path-to-gig-folder)</code><comment>// will open all .line files in that folder, each file in a new terminal tab</comment></p>
+<p><strong>To list a gig's files</strong><tag-new>v0.8.2</tag-new></p>
+<p><code>lgig(path-to-gig-folder)</code></p>
+<br>
+
+<p><strong>Switch between notes and cc modes:</strong></p>
 <p>notes mode</p>
 <p><code>n</code> </p>
 <p>cc mode on channel 2</p>
@@ -147,7 +157,7 @@
 <p>from default <strong>line&gt;</strong> to <strong>_my_synth&gt;</strong>, type:</p>
 <p><code>lb(my_synth)</code></p>
 <p><strong>Exit:</strong></p>
-<p><code>q</code> or <code>quit</code>  </p>
+<p><code>q</code> or <code>quit</code> </p>
 <p><strong>Display commands standard menu/extended menu:</strong></p>
 <p><code>ls</code> or <code>le</code></p>
 <hr />
@@ -159,10 +169,14 @@
 <br>
 <a class="book" name="underscore"></a>
 <h2>"_" underscore char adjacent after any command</h2>
-<p>The same previous combo but randomly positioned every new cycle/bar, forever</p>
+<p>The same previous combo but randomly repositioned notes every new cycle/bar, forever</p>
 <p><code>c4 c5 c6 c7 mult(4) s_</code></p>
-<p>The same previous combo but randomly positioned next 2 cycles/bars</p>
+<p>Randomly repositioned notes for the next 2 cycles/bars</p>
 <p><code>c4 c5 c6 c7 mult(4) s_2</code></p>
+<p>Randomly repositioned notes on every 2nd bar next 4 cycles/bars<tag-new>v0.8.2</tag-new></p>
+<p><code>c4 c5 c6 c7 mult(4) s_2_4</code></p>
+<p>Randomly repositioned notes on every 2nd bar, forever<tag-new>v0.8.2</tag-new></p>
+<p><code>c4 c5 c6 c7 mult(4) s_2_</code></p>
 <hr />
 
 <a class="book" name="reference"></a>
@@ -251,6 +265,8 @@
 <p><code>label(s)</code> rename prompt with s name<tag-new>v0.8</tag-new></p>
 <p><code>lb(s)</code> - same as <code>label</code></p>
 <p><code>lf(s)</code> - open file with s name</p>
+<p><code>lgig(path-to-gig-folder)</code> - list all .line file in a folder<tag-new>v0.8.2</tag-new></p> 
+<p><code>ogig(path-to-gig-folder)</code> - opens all .line file in a folder, each file in a new termial tab<tag-new>v0.8.2</tag-new></p> 
 <p><code>open(s)</code> - same as <code>lf</code><tag-new>v0.8</tag-new></p>
 <p><code>save(s)</code> - save file with s name<tag-new>v0.8</tag-new></p>
 <p><code>sf(s)</code> - same as <code>save</code></p>
@@ -261,6 +277,7 @@
 <p><code>roct(min max)</code> - random octave values between min and max<tag-new>v0.8</tag-new></p>
 <p><code>rgain(min max)</code> - random gain values between min and max. Decimal gain values between 0.0 and 1.0<tag-new>v0.8</tag-new></p>
 <p><code>rvalue(min max)</code> - random MIDI values between min and max<tag-new>v0.8</tag-new></p>
+<p><code>rvalueb(min max)</code> - random MIDI values between min and max to fill blank notes "_" <u>only</u><tag-new>v0.8.2</tag-new></p>
 
 <h3>with <em>3</em> arguments</h3>
 <p><code>pick(v1 v2 v3)</code> - pick randomly v1, v2 or v3<tag-new>v0.8</tag-new></p>
@@ -269,6 +286,7 @@
 
 <h3>with <em>7</em> arguments</h3>
 <p><code>pick(v1 v2 v3 v4 v5 v6 v7)</code> - pick randomly from v1 to v7<tag-new>v0.8</tag-new></p>
+<p><code>pick(v1 v2 v3 v4 v5 v6 v7)</code> - pick randomly from v1 to v7 to fill blank notes "_" <u>only</u><tag-new>v0.8.2</tag-new></p>
 
 <!-- <p>...</p>
 <p><warning>commands' table by number of arguments is work in progress<warning></p> -->
@@ -380,8 +398,8 @@
         <td>mixolydian</td>
         <td>maeolian</td>
         <td>locrian</td>
-        <td class="td-inact"></td>
-        <td class="td-inact"></td>
+        <td>ogig</td>
+        <td>lgig</td>
         <td class="td-inact"></td>
         <td class="td-inact"></td>
         <td class="td-inact"></td>
@@ -395,7 +413,7 @@
         <td>roct</td>
         <td>rgain</td>
         <td>rvalue</td>
-        <td class="td-inact"></td>
+        <td>rvalueb</td>
         <td class="td-inact"></td>
         <td class="td-inact"></td>
         <td class="td-inact"></td>
@@ -435,7 +453,7 @@
     <tr>
         <td style="font-weight: 600;">7 args</td>
         <td>pick</td>
-        <td class="td-inact"></td>
+        <td>pickb</td>
         <td class="td-inact"></td>
         <td class="td-inact"></td>
         <td class="td-inact"></td>
