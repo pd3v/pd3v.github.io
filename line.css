@@ -62,6 +62,15 @@ tag-new {
   padding: 3px;
   margin-left: 5px;
 }
+tag-note {
+  display: inline;
+  /* color: rgb(0, 0, 0); */
+  background-color: #fcb9b9;  
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 3px;
+  margin-left: 5px;
+}
 table {
   border-collapse: collapse;
   border-style: solid;
